@@ -50,3 +50,6 @@ button{
 #name{
     border: 0;
 }
+h2 span{
+    border-bottom: 2px solid blue;
+}
