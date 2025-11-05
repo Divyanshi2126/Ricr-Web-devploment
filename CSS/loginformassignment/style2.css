@@ -3,9 +3,9 @@ body
     background-color: rgb(64, 64, 254);
 }
 #mainbox {
-  width: 340px;
-  height: 300px;
-  margin: 50px auto;
+  width: 320px;
+  height: 450px;
+  margin: 50px auto ;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
@@ -20,13 +20,9 @@ h2{
     text-align: left;
     
 }
-#s2{
-    text-align: right;
-    color: blue;
-    margin: 5px;
-}
+
 button{
-    width: 290px;
+    width: 280px;
     height: 50px;
     text-align: center;
     padding: 7px;
@@ -45,11 +41,12 @@ button{
 }
 #email
 {
-    opacity: 70%;
     border: 0;
 }
 #pass
 {
-    opacity: 70%;
+    border: 0;
+}
+#name{
     border: 0;
 }
