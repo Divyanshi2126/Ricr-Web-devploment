@@ -6,6 +6,15 @@
   gap: 10px;
 }
 
+#mainDiv{
+    width:50%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+
+}
+
 .subDiv {
   border: 1px solid black;
   border-radius: 15px;
