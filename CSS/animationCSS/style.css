@@ -1,0 +1,33 @@
+
+h1 {
+  width: 200px;
+  border: 3px solid blue;
+  margin-left: 0px;
+  border-radius: 5px;
+}
+h1:hover {
+  margin-left: 200px;
+  transition: margin-left 6s;
+  width: 400px;
+  transition: width 6s;
+}
+h2 {
+  width: 200px;
+  height: 30px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 5px;
+}
+#inner {
+  width: 10px;
+  height: 30px;
+  background-color: rgb(37, 21, 21);
+}
+
+h2:hover {
+  #inner {
+    width: 100%;
+    background-color: rgb(143, 206, 143);
+    transition: width 6s ease-out, background-color 5s ease-in-out;
+    
+  }
+}
