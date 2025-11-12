@@ -649,6 +649,8 @@
 }
 #D2 > input,
 #D2 > textarea {
+  text-align: center;
+  margin-top:20px ;
   width: 90%;
   border: none;
   outline: none;
