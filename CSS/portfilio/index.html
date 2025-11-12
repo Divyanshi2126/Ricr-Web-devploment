@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div id="navbar">
-      <h3>PORTFOLIO</h3>
+      <h3>PORTOFOLIO</h3>
       <div id="nav-items">
-        <span>&#9813; Page</span>
-        <span>&#9813; Account</span>
-        <span>&#9813; Docs</span>
+        <span><i class="fa-solid fa-pager"></i> Page</span>
+        <span><i class="fa-solid fa-user"></i> Account</span>
+        <span><i class="fa-solid fa-file"></i> Docs</span>
       </div>
       <div id="nav-buttons">
         <button id="b1">SIGN IN</button>
@@ -22,7 +29,7 @@
 
     <div id="hero">
       <div class="hero-text">
-        <h1>Welcome to my Web<br />Development Portfolio!</h1>
+        <h1>Welcome to my Web<br />Development Portofolio!</h1>
         <p>
           I'm sizuka, a passionate web developer based in the USA. Here, you'll
           get a glimpse of my journey in the world of web development, where
@@ -156,59 +163,56 @@
         <button id="seeDetails">See details</button>
       </div>
     </div>
-    <div id="myresume">
-      <div>
+
+    <section id="myresume">
+      <div class="resume-left">
         <h1>My Resume</h1>
         <p>
           Highly skilled and creative Web Developer with 5+ years of experience
           in crafting visually stunning and functionally robust websites and web
           applications.
         </p>
-        <button id="viewmore">View More &#8594;</button>
+        <button class="viewmore">VIEW MORE →</button>
       </div>
 
-      <div>
-        <div>
-          <button>&#128246;</button>
+      <div class="resume-right">
+        <div class="resume-item">
+          <div class="resume-icon">📊</div>
           <p>Bachelor of Science in Computer Science</p>
         </div>
-        <div>
-          <button>&#129513;</button>
+        <div class="resume-item">
+          <div class="resume-icon">🧩</div>
           <p>Certified Web Developer</p>
         </div>
-        <div>
-          <button>&#8598;</button>
+        <div class="resume-item">
+          <div class="resume-icon">✨</div>
           <p>Frontend Framework Proficiency Certification</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div id="whtaClientsSay">
-      <h1>What Clients Say</h1>
-      <p>
-        Discover what clients have to say about their experiences working <br />
-        with me. My client's satisfaction is my greatest achievement!
-      </p>
-
-      <div class="clientsay">
-        <h1>Mobile App <br />Developement</h1>
+    <section id="whtaClientsSay">
+      <div class="client-left">
+        <h2>Mobile App<br />Development</h2>
         <p>
           I had the pleasure of working with Lily on a critical web development
           project, and I can confidently say that their expertise and
           professionalism exceeded my expectations.
         </p>
-        <h4>Michael - Technical Manager</h4>
-        <h4>Marketing @ APPLE INC.</h4>
-        <button><img src="doreemon.png" alt="pic1" /></button>
-        <hr />
-        <button><img src="nobita.jpg" alt="pic2" /></button>
-        <hr />
-        <button><img src="sizuka.webp" alt="pic3" /></button>
+        <h4><b>Michael - Technical Manager</b></h4>
+        <h5>Marketing @ APPLE INC.</h5>
+
+        <div class="client-profiles">
+          <img src="doreemon.png" alt="pic1" />
+          <img src="nobita.jpg" alt="pic2" />
+          <img src="sizuka.webp" alt="pic3" class="active" />
+        </div>
       </div>
-      <div class="clientsay">
-        <img src="sizuka.webp" alt="harspic" />
+
+      <div class="client-right">
+        <img src="sizuka.webp" alt="Client Image" />
       </div>
-    </div>
+    </section>
 
     <div id="popularClients">
       <p id="p1"><b>POPULAR CLIENTS</b></p>
@@ -223,58 +227,73 @@
       <div class="subdiv"><img src="amazon.png" alt="amazon" /></div>
       <div class="subdiv"><img src="netflix.png" alt="netflix" /></div>
     </div>
+    <section id="Contactus">
+      <div class="contact-container">
+        <!-- Left Contact Info Box -->
+        <div class="contact-info">
+          <h2>Contact Information</h2>
+          <p>
+            Fill up the form and our Team will get back to you <br />
+            within 24 hours.
+          </p>
 
-    <div id="Contactus">
-      <h1>Contact Us</h1>
-      <p>
-        Ready to get started? Feel free to reach out through the <br />
-        contact form, and let's embark on a journey of innovation and
-        <br />
-        success.
-      </p>
-
-      <div id="D1">
-        <h1>Contact Information</h1>
-        <p>
-          Fill up the form and our Team will get back to you <br />within 24
-          hours.
-        </p>
-        <br />
-        <p>
-          &#128222; +91-9131164810 <br />
-          &#9993; chaurasiyadivyanshi636@gmail.com <br />
-          &#127915; open support ticket
-        </p>
-      </div>
-      <div id="D2">
-        <span id="s1">First Name <br /></span>
-        <input type="text" id="FirstName" placeholder="eg.divyanshi" />
-        <hr />
-        <span id="s2">Last Name <br /></span>
-        <input type="text" id="LastName" placeholder="eg.chaurasiya" />
-        <hr />
-        <span id="s3">Email <br /></span>
-        <input type="email" id="email" placeholder="eg..divyanshi@gmail.com" />
-        <hr id="email" />
-        <span>What are you interested on?</span>
-        <div id="radio">
-          <input type="radio" id="Design" />
-          <label for="Design">Design</label>
-          <input type="radio" id="Developement" />
-          <label for="Design">Developement</label>
-          <input type="radio" id="Support" />
-          <label for="Design">Support</label>
-          <input type="radio" id="Other" />
-          <label for="Design">Other</label>
-
-          <span
-            >Your Message <br />
-            <textarea name="Your Message" id="Your Message"></textarea>
-          </span>
-          <button id="SendMesssage">Send Message</button>
+          <div class="info-item">
+            <span class="icon">📞</span>
+            <p><b>+91 9131164810</b></p>
+          </div>
+          <div class="info-item">
+            <span class="icon">📧</span>
+            <p><b>diviyanshi@mail.com</b></p>
+          </div>
+          <div class="info-item">
+            <span class="icon">🎟️</span>
+            <p><b>Open Support Ticket</b></p>
+          </div>
         </div>
+
+        <!-- Right Contact Form -->
+        <form class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" placeholder="eg. divii" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" placeholder="eg. chaurasiya" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="eg. divyanshi@mail.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>What are you interested on?</label>
+            <div class="radio-group">
+              <label
+                ><input type="radio" name="interest" checked /> Design</label
+              >
+              <label><input type="radio" name="interest" /> Development</label>
+              <label><input type="radio" name="interest" /> Support</label>
+              <label><input type="radio" name="interest" /> Other</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Your Message</label>
+            <textarea placeholder=""></textarea>
+          </div>
+
+          <button type="submit" class="send-btn">SEND MESSAGE</button>
+        </form>
       </div>
-    </div>
+    </section>
 
     <footer id="footer">
       <hr />

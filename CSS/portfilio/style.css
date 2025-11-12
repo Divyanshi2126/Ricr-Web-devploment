@@ -147,7 +147,7 @@
 /* ===== Clients Section ===== */
 #clients {
   text-align: center;
-  padding: 60px 0;
+  padding: 80px 0;
 }
 
 #clients > p {
@@ -158,7 +158,7 @@
 }
 
 #clients > img {
-  width: 120px;
+  width: 160px;
   margin: 0 20px;
   vertical-align: middle;
   transition: transform 0.3s ease;
@@ -347,206 +347,207 @@
 }
 
 
-
-
-/* ===== My Resume Section ===== */
+/* //=== My Resume Section === */
 #myresume {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 80px 100px;
-  background-color: #fff;
-  gap: 60px;
+  padding: 100px 150px;
+  background: #fff;
+  gap: 80px;
+  flex-wrap: wrap;
 }
 
-/* ===== Left Column ===== */
-#myresume > h1 {
-  font-size: 42px;
+/* Left Side */
+.resume-left {
+  width: 45%;
+}
+
+.resume-left h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2b2b2b;
+  margin-bottom: 20px;
+}
+
+.resume-left p {
+  font-size: 18px;
+  color: #8d8d8d;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.viewmore {
+  background: none;
+  border: none;
+  color: #1f1f1f;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.3s ease;
+}
+
+.viewmore:hover {
+  transform: translateX(5px);
+}
+
+/* Right Side */
+.resume-right {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+/* Each Item */
+.resume-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.resume-icon {
+  background: #1e1e1e;
+  color: #fff;
+  font-size: 22px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.resume-item p {
+  font-size: 17px;
+  color: #999;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  #myresume {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  .resume-left,
+  .resume-right {
+    width: 100%;
+  }
+
+  .resume-item {
+    justify-content: center;
+  }
+}
+
+
+/* === What Clients Say Section === */
+#whtaClientsSay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 150px;
+  background: #fff;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+/* === Left Column === */
+.client-left {
+  width: 50%;
+}
+
+.client-left h2 {
+  font-size: 36px;
   font-weight: 700;
   color: #222;
   margin-bottom: 20px;
 }
 
-#myresume > p {
-  color: #777;
+.client-left p {
+  color: #7a7a7a;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.client-left h4 {
   font-size: 16px;
-  line-height: 1.7;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
-
-#myresume > #viewmore {
-  background: none;
-  border: none;
   color: #111;
-  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.client-left h5 {
   font-size: 15px;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  color: #999;
+  margin-bottom: 30px;
 }
 
-#myresume > #viewmore:hover {
-  color: #444;
-  width: 10px;
-  height: 20px;
-}
-
-/* ===== Right Column ===== */
-#myresume > div {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-/* Each Row: Icon + Text */
-#myresume > div > div {
+/* === Profile Thumbnails === */
+.client-profiles {
   display: flex;
   align-items: center;
   gap: 15px;
-  
 }
 
-/* Icon Button */
-#myresume > div > div > button {
-  
-  background-color: #111;
-  color: #fff;
-  border: none;
+.client-profiles img {
+  width: 50px;
+  height: 50px;
   border-radius: 10px;
-  padding: 12px;
-  font-size: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  cursor: default;
-}
-
-/* Text beside icon */
-#myresume > div > div > p {
-  color: #777;
-  font-size: 16px;
-  margin: 0;
-  
-}
-
-
-/* ===== What Clients Say Section ===== */
-#whtaClientsSay {
-  text-align: center;
-  padding: 80px 100px;
-  background-color: #fff;
-}
-
-/* Heading */
-#whtaClientsSay > h1 {
-  font-size: 38px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 20px;
-}
-
-/* Paragraph */
-#whtaClientsSay > p {
-  font-size: 18px;
-  color: #999;
-  line-height: 1.7;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-
-/* ===== What Clients Say Section ===== */
-#whtaClientsSay {
-  padding: 80px 100px;
-  background: #fff;
-}
-
-/* Heading + intro */
-#whtaClientsSay > h1 {
-  text-align: center;
-  font-size: 38px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 20px;
-}
-#whtaClientsSay > p {
-  text-align: center;
-  color: #999;
-  line-height: 1.6;
-  font-size: 18px;
-  margin-bottom: 130px;
-}
-
-/* Two columns (text + image) */
-#whtaClientsSay > .clientsay:first-of-type {
-  display: inline-block;
-  width: 50%;
-  vertical-align: top;
-}
-#whtaClientsSay > .clientsay:last-of-type {
-  display: inline-block;
-  width: 40%;
-  text-align: right;
-}
-
-/* Left column text */
-#whtaClientsSay > .clientsay:first-of-type > h1 {
-  font-size: 32px;
-  color: #222;
-  margin-bottom: 20px;
-}
-#whtaClientsSay > .clientsay:first-of-type > p {
-  color: #888;
-  font-size: 18px;
-  line-height: 1.8;
-  margin-bottom: 25px;
-}
-#whtaClientsSay > .clientsay:first-of-type > h4:first-of-type {
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 8px;
-}
-#whtaClientsSay > .clientsay:first-of-type > h4:last-of-type {
-  color: #aaa;
-  font-weight: 400;
-  margin-bottom: 25px;
-}
-
-/* Profile icons */
-#whtaClientsSay > .clientsay:first-of-type > button {
-  border: none;
-  background: transparent;
-  margin-right: 10px;
-  cursor: pointer;
-}
-#whtaClientsSay > .clientsay:first-of-type > button > img {
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
   object-fit: cover;
-  transition: 0.3s;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
-#whtaClientsSay > .clientsay:first-of-type > button:hover > img {
+
+.client-profiles img:hover {
+  opacity: 1;
   transform: scale(1.05);
 }
 
-/* Divider */
-#whtaClientsSay > .clientsay:first-of-type > hr {
-  display: inline-block;
-  width: 1px;
-  height: 40px;
-  background: #ddd;
-  border: none;
-  margin: 0 5px;
+.client-profiles img.active {
+  opacity: 1;
+  border: 2px solid #111;
 }
 
-/* Right column image */
-#whtaClientsSay > .clientsay:last-of-type > img {
-  width: 400px;
-  height: 400px;
+/* === Right Column (Client Image) === */
+.client-right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.client-right img {
+  width: 100%;
+  max-width: 380px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* === Responsive Design === */
+@media (max-width: 992px) {
+  #whtaClientsSay {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  .client-left, .client-right {
+    width: 100%;
+  }
+
+  .client-profiles {
+    justify-content: center;
+  }
+}
 
 
 /* ===== Popular Clients Section ===== */
@@ -589,93 +590,180 @@
   transform: scale(1.05);
 }
 
-/* ===== Contact Us Section ===== */
+
+/* === Contact Section === */
 #Contactus {
-  text-align: center;
-  padding: 100px 50px 120px;
   background: #fff;
-}
-#Contactus > h1 {
-  color: #222;
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-#Contactus > p {
-  color: #999;
-  font-size: 18px;
-  line-height: 1.7;
+  padding: 80px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-/* ===== Contact Section ===== */
-#D1, #D2 {
-  display: inline-block;
-  vertical-align: top;
-  padding: 50px;
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
   border-radius: 12px;
-  margin: 40px 20px;
-  box-sizing: border-box;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  width: 90%;
+  max-width: 1200px;
+  flex-wrap: wrap;
 }
 
-#D1 {
-  width: 45%;
-  height: 600px;
+/* === Left Info Box === */
+.contact-info {
   background: #1e1e1e;
   color: #fff;
+  width: 35%;
+  padding: 60px 50px;
+  border-radius: 8px 0 0 8px;
 }
-#D1 > h1 {
-  font-size: 28px;
+
+.contact-info h2 {
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 15px;
 }
-#D1 > p {
-  color: #e7e1e1;
-  font-size: 16px;
-  line-height: 1.8;
-  text-align: start;
+
+.contact-info p {
+  color: #ccc;
+  font-size: 15px;
+  margin-bottom: 30px;
+  line-height: 1.7;
 }
 
-/* Right Form Section */
-#D2 {
-  width: 45%;
+/* Contact Details */
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.info-item .icon {
+  font-size: 22px;
+}
+
+/* === Right Form === */
+.contact-form {
+  width: 65%;
+  padding: 60px;
   background: #fff;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
-#D2 > span {
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  flex: 1;
+}
+
+.form-group label {
   font-size: 15px;
+  color: #555;
+  margin-bottom: 8px;
   font-weight: 600;
-  color: #444;
 }
-#D2 > input,
-#D2 > textarea {
-  text-align: center;
-  margin-top:20px ;
-  width: 90%;
+
+.form-group input,
+.form-group textarea {
   border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  font-size: 15px;
   outline: none;
-  font-size: 16px;
-  margin-bottom: 10px;
+  color: #333;
   background: transparent;
 }
-#D2 > hr {
-  border: 0;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 25px;
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #bbb;
 }
 
-/* Radio options */
-#D2 > #radio {
-  margin-top: 20px;
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom: 1px solid #222;
 }
-#D2 > #radio > input {
-  margin-right: 6px;
+
+/* === Radio Group === */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 8px;
 }
-#D2 > #radio > label {
-  margin-right: 20px;
-  color: #666;
+
+.radio-group label {
   font-size: 15px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+
+.radio-group input[type="radio"] {
+  accent-color: #000;
+}
+
+/* === Message Box === */
+.form-group textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  margin-top: 5px;
+}
+
+/* === Send Button === */
+.send-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+  float: right;
+}
+
+.send-btn:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-info,
+  .contact-form {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .send-btn {
+    width: 100%;
+    float: none;
+  }
+}
+
+
 
 /* Message Area */
 #D2 > #radio > span {
@@ -693,6 +781,10 @@
   outline: none;
   resize: none;
 }
+
+
+
+
 
 /* Send Button */
 #D2 > #radio > button {
