@@ -32,3 +32,18 @@ button{
     background-color: yellow;
 
 }
+
+#bulb1{
+     height: 50px;
+    width: 50px;
+    padding: 50px;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    width: fit-content;
+
+}
+.color{
+    width: 2px;
+    height: 1px;
+    
+}
