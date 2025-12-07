@@ -1,0 +1,37 @@
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+#navbar {
+  background: #111;
+}
+
+.nav-link:hover {
+  color: #00c6ff !important;
+}
+
+.hero {
+  height: 100vh;
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  color: #fff;
+  padding-top: 70px;
+}
+
+.hero h1 {
+  font-size: 55px;
+  font-weight: 700;
+}
+
+#courseContainer .card {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#courseContainer .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.btn:hover {
+  opacity: 0.8;
+}

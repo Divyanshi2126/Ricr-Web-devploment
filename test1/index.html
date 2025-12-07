@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Course Landing Site</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="navbar">
+      <div class="container">
+        <a class="logo fs-3 text-start" href="#">Online Course Landing Site</a>
+        <button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item">
+              <a href="#courses" class="nav-link">Courses</a>
+
+            </li>
+            <li class="nav-item">
+              <a href="#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contact" class="nav-link">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section
+      id="home"
+      class="hero text-center d-flex flex-column justify-content-center align-items-center"
+    >
+      <h1>Learn Coding With Us</h1>
+      <p>Start your journey with real-world projects and hands-on training.</p>
+      <a href="#courses" class="btn btn-light btn-lg mt-3">Get Started</a>
+    </section>
+
+    <section id="courses" class="py-5">
+      <div class="container text-center"            
+>
+        <h2 class="mb-4">Our Courses</h2>
+        <div id="courseContainer" class="row g-4"></div>
+      </div>
+      <input
+            type="enroll"
+            id="enroll"
+            class=" btn btn-light btn-lg mt-3 text-capitalize form-control mb-3 text-center "
+            placeholder="Enroll"
+          />
+    </section>
+
+    <section id="about" class="py-5 bg-light text-center">
+      <div class="container">
+        <h2>About Us</h2>
+        <p>
+          We provide high quality learning resources for students and
+          professionals.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <form id="contactForm" class="col-md-6 mx-auto">
+          <input
+            type="text"
+            id="cname"
+            class="form-control mb-3"
+            placeholder="Your Name"
+          />
+          <input
+            type="email"
+            id="cemail"
+            class="form-control mb-3"
+            placeholder="Your Email"
+          />
+          <textarea
+            id="cmessage"
+            class="form-control mb-3"
+            rows="4"
+            placeholder="Message"
+          ></textarea>
+          <button type="submit" class="btn btn-primary w-100">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
