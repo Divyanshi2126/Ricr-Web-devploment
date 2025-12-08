@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India Map Search</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light">
+
+  <div class="container py-4">
+    <h2 class="text-center mb-3">India Map Search</h2>
+
+    <div class="input-group mb-4">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search state e.g., Maharashtra, Gujarat, Delhi">
+      <button class="btn btn-primary" id="searchBtn">Search</button>
+    </div>
+
+    <div id="mapContainer">
+      <img src="map.jpg" id="indiaMap" alt="India Map">
+      <div id="marker" class="marker" style="display:none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
