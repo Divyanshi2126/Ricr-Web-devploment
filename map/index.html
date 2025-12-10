@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>India Map Search</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body class="bg-light">
 
-  <div class="container py-4">
-    <h2 class="text-center mb-3">India Map Search</h2>
+<div class="container mt-4 text-center">
+  <h2 class="mb-3 fw-bold">Search State - India Map</h2>
 
-    <div class="input-group mb-4">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search state e.g., Maharashtra, Gujarat, Delhi">
-      <button class="btn btn-primary" id="searchBtn">Search</button>
-    </div>
-
-    <div id="mapContainer">
-      <img src="map.jpg" id="indiaMap" alt="India Map">
-      <div id="marker" class="marker" style="display:none;"></div>
-    </div>
+  <div class="input-group mb-3 w-50 mx-auto">
+    <input type="text" id="searchState" class="form-control" placeholder="Enter State Name (e.g., Bihar, UP, Gujarat)">
+    <button class="btn btn-primary" onclick="searchLocation()">Search</button>
+    <button class="btn btn-success" onclick="playSound()">🔊</button>
+    <button class="btn btn-danger" onclick="startVoiceSearch()">🎤</button>
   </div>
 
-  <script src="script.js"></script>
+  <p class="fw-semibold text-primary" id="voiceText"></p>
+</div>
+
+<div class="map-container">
+  <img src="Map.jpg" id="indiaMap">
+  <img src="flag.gif" id="marker">   <!-- animated flag marker -->
+</div>
+
+<audio id="clickSound">
+  <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_5a83175f28.mp3?filename=click-21156.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
 </body>
 </html>

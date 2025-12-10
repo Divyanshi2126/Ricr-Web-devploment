@@ -1,21 +1,26 @@
-#mapContainer {
+.map-container {
   position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
+  width: 670.875px;
+  height: 816.412px;
+  margin: 0 auto;
 }
 
 #indiaMap {
   width: 100%;
-  display: block;
+  height: 100%;
 }
 
-.marker {
+#marker {
+  width: 35px;
   position: absolute;
-  width: 18px;
-  height: 18px;
-  background-color: red;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid white;
+  display: none;
+  transform: translate(-50%, -100%);
+  animation: bounce 1s infinite;
+}
+
+/* animated bounce */
+@keyframes bounce {
+  0% { transform: translate(-50%, -90%); }
+  50% { transform: translate(-50%, -110%); }
+  100% { transform: translate(-50%, -90%); }
 }
