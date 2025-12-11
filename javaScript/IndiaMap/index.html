@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Map - Improved UI with Dropdown</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 15px;
+            padding: 20px;
+            height: 92vh;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .map-wrapper {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            height: 92vh;
+            padding: 15px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .map-image {
+            max-height: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+        }
+
+        .state-flag {
+            position: absolute;
+            font-size: 26px;
+            color: #ffeb3b;
+            text-shadow: 0 0 8px black;
+            transform: translate(-50%, -80%);
+            cursor: pointer;
+        }
+
+        .state-flag:hover {
+            transform: translate(-50%, -90%) scale(1.2);
+            color: #00ffea;
+        }
+
+        .custom-tooltip {
+            position: fixed;
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.85);
+            border: 2px solid #ffeb3b;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+            z-index: 999;
+        }
+
+        .state-btn {
+            margin: 3px;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+        }
+
+        select {
+            background: rgba(255,255,255,0.8) !important;
+            border-radius: 10px !important;
+            color: #000 !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container-fluid py-3">
+    <div class="row g-4">
+
+        <!-- Sidebar -->
+        <div class="col-lg-3 col-md-4">
+            <div class="sidebar">
+
+                <h3 class="text-center fw-bold mb-3">
+                    <i class="fas fa-map"></i> India Map
+                </h3>
+
+                <!-- Dropdown -->
+                <label class="fw-bold">Search State:</label>
+                <select id="stateDropdown" class="form-select mb-3">
+                    <option value="">Choose State</option>
+                </select>
+
+                <button class="btn btn-warning btn-sm w-100 mb-3" onclick="goDropdownState()">
+                    <i class="fas fa-location-dot"></i> Locate
+                </button>
+
+                <hr>
+
+                <!-- Buttons --> 
+                <button class="btn btn-success w-100 mb-2" id="addAllBtn">
+                    <i class="fas fa-check-double"></i> Add All States
+                </button>
+
+                <button class="btn btn-danger w-100 mb-4" id="clearAllBtn">
+                    <i class="fas fa-trash"></i> Clear Map
+                </button>
+
+                <h6 class="text-center mb-2">Or Click Below:</h6>
+
+                <div id="stateButtonsContainer" class="d-flex flex-wrap justify-content-center"></div>
+
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="col-lg-9 col-md-8">
+            <div class="map-wrapper position-relative text-center">
+
+                <img src="Map.jpg" id="indiaMap" class="map-image">
+
+                <div id="flagsLayer" style="position:absolute; top:0; left:0; width:100%; height:100%;"></div>
+
+            </div>
+
+            <div class="text-center mt-2">
+                <span id="statusText" class="badge bg-dark px-3 py-2">Ready</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="infoTooltip" class="custom-tooltip">
+    <div id="tooltipState"></div>
+    <div id="tooltipCapital" class="small text-warning"></div>
+</div>
+
+<!-- Sounds -->
+<audio id="sound-click" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.m4a"></audio>
+<audio id="sound-add-all" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.m4a"></audio>
+<audio id="sound-clear" src="https://assets.mixkit.co/active_storage/sfx/2572/2572-preview.m4a"></audio>
+
+<script>
+/* ---------------------------------------------------
+   STATES DATA (Your Same Coordinates)
+--------------------------------------------------- */
+const statesData = [
+    { name: "Andhra Pradesh", capital: "Amaravati", top: 73, left: 45 },
+    { name: "Arunachal Pradesh", capital: "Itanagar", top: 29, left: 67 },
+    { name: "Assam", capital: "Dispur", top: 36, left: 65 },
+    { name: "Bihar", capital: "Patna", top: 38, left: 55 },
+    { name: "Chhattisgarh", capital: "Raipur", top: 54, left: 50 },
+    { name: "Goa", capital: "Panaji", top: 68, left: 37 },
+    { name: "Gujarat", capital: "Gandhinagar", top: 48, left: 33 },
+    { name: "Haryana", capital: "Chandigarh", top: 28, left: 42 },
+    { name: "Himachal Pradesh", capital: "Shimla", top: 20, left: 44 },
+    { name: "Jharkhand", capital: "Ranchi", top: 45, left: 55 },
+    { name: "Karnataka", capital: "Bengaluru", top: 73, left: 41 },
+    { name: "Kerala", capital: "Thiruvananthapuram", top: 86, left: 41 },
+    { name: "Madhya Pradesh", capital: "Bhopal", top: 47, left: 45 },
+    { name: "Maharashtra", capital: "Mumbai", top: 60, left: 40 },
+    { name: "Manipur", capital: "Imphal", top: 41, left: 68 },
+    { name: "Meghalaya", capital: "Shillong", top: 38, left: 64 },
+    { name: "Mizoram", capital: "Aizawl", top: 44, left: 66 },
+    { name: "Nagaland", capital: "Kohima", top: 35, left: 69 },
+    { name: "Odisha", capital: "Bhubaneswar", top: 56, left: 53 },
+    { name: "Punjab", capital: "Chandigarh", top: 21, left: 41 },
+    { name: "Rajasthan", capital: "Jaipur", top: 35, left: 39 },
+    { name: "Sikkim", capital: "Gangtok", top: 34, left: 59.3 },
+    { name: "Tamil Nadu", capital: "Chennai", top: 84, left: 45 },
+    { name: "Telangana", capital: "Hyderabad", top: 64, left: 44 },
+    { name: "Tripura", capital: "Agartala", top: 43, left: 64 },
+    { name: "Uttar Pradesh", capital: "Lucknow", top: 34, left: 49 },
+    { name: "Uttarakhand", capital: "Dehradun", top: 24, left: 45 },
+    { name: "West Bengal", capital: "Kolkata", top: 45, left: 58 },
+    { name: "Jammu & Kashmir", capital: "Srinagar", top: 13, left: 40 },
+    { name: "Ladakh", capital: "Leh", top: 10, left: 45 }
+];
+
+const flagsLayer = document.getElementById("flagsLayer");
+const stateButtonsContainer = document.getElementById("stateButtonsContainer");
+const dropdown = document.getElementById("stateDropdown");
+
+/* ---------------------------------------------------
+   1. INITIALIZATION — Add buttons and dropdown items
+--------------------------------------------------- */
+function init() {
+    statesData.forEach(s => {
+
+        // Button
+        const btn = document.createElement("button");
+        btn.className = "btn btn-outline-light state-btn";
+        btn.innerText = s.name;
+        btn.onclick = () => placeFlag(s, true);
+        stateButtonsContainer.appendChild(btn);
+
+        // Dropdown
+        const opt = document.createElement("option");
+        opt.value = s.name;
+        opt.innerText = s.name;
+        dropdown.appendChild(opt);
+    });
+}
+
+init();
+
+/* ---------------------------------------------------
+   2. PLACE FLAG ON MAP
+--------------------------------------------------- */
+function placeFlag(state, playSound) {
+    if (document.getElementById("flag-" + state.name)) return;
+
+    if (playSound) {
+        document.getElementById("sound-click").play();
+    }
+
+    const flag = document.createElement("i");
+    flag.className = "fas fa-location-pin state-flag";
+    flag.id = "flag-" + state.name;
+
+    flag.style.top = state.top + "%";
+    flag.style.left = state.left + "%";
+
+    flag.onmousemove = (e) => {
+        const tool = document.getElementById("infoTooltip");
+        document.getElementById("tooltipState").innerText = state.name;
+        document.getElementById("tooltipCapital").innerText = "Capital: " + state.capital;
+
+        tool.style.display = "block";
+        tool.style.left = (e.clientX + 15) + "px";
+        tool.style.top = (e.clientY + 15) + "px";
+    };
+
+    flag.onmouseleave = () => document.getElementById("infoTooltip").style.display = "none";
+
+    flagsLayer.appendChild(flag);
+}
+
+/* ---------------------------------------------------
+   3. FROM DROPDOWN — Locate State
+--------------------------------------------------- */
+function goDropdownState() {
+    const selected = dropdown.value;
+    if (!selected) return;
+
+    const state = statesData.find(s => s.name === selected);
+    placeFlag(state, true);
+}
+
+/* ---------------------------------------------------
+   4. ADD ALL
+--------------------------------------------------- */
+document.getElementById("addAllBtn").onclick = () => {
+    document.getElementById("sound-add-all").play();
+    statesData.forEach((s, i) => {
+        setTimeout(() => placeFlag(s, false), i * 50);
+    });
+};
+
+/* ---------------------------------------------------
+   5. CLEAR ALL
+--------------------------------------------------- */
+document.getElementById("clearAllBtn").onclick = () => {
+    document.getElementById("sound-clear").play();
+    flagsLayer.innerHTML = "";
+};
+
+</script>
+
+</body>
+</html>
