@@ -1,67 +1,66 @@
-function submit() {
-  const nm = document.getElementById("fullName").value.trim();
-  const em = document.getElementById("email").value.trim();
-  const ph = document.getElementById("phone").value.trim();
-  const db = document.getElementById("DOB").value.trim();
+function Submit() {
+    const nm = document.getElementById("FullName").value.trim()
+    const pn = document.getElementById("PhoneNumber").value.trim()
+    const em = document.getElementById("email").value.trim()
+    const db = document.getElementById("DOB").value.trim()
 
-document.querySelectorAll(".Error").forEach((Element)=>{
-  Element.innerHTML="";
-});
+    document.querySelectorAll(".Error").forEach((element) => {
+        element.innerHTML = "";
+    })
 
-if(!nm ){
-  document.getElementById("nameerror").innerHTML="Required";
-  return;
-}else{
-  (!+/^[A-Za-z]+$/.test(nm)) 
-    document.getElementById("nameError").innerText= "only albhapet and space allowed";
-    return;
-  }
+    if (!nm) {
+        document.getElementById("NameError").innerText = "Required";
+    }
+    else if (!/^[A-Za-z ]+$/.test(nm)) {
+        document.getElementById("NameError").innerText = "Only Alphabets and Space allowed";
+        return;
+    }
 
+    // validation
+    // if(data is invalid)
+    //     alert()
+    if (!em) {
+        document.getElementById("EmailError").innerText = "Required";
+    }
+    else if (!/^[\w\.]+@(gmail|outlook||ricr|yahoo)\.(com|in|co.in)$/.test(em)) {
+        document.getElementById("EmailError").innerText = "Follow Correct Email Format";
+        return;
+    }
 
-  
+    if (!pn) {
+        document.getElementById("NumberError").innerText = "Required";
+    }
 
-  //   validation
-  //   if(data is invalid)
-  //     alert()
+    else if (!/^[6-9]\d{9}$/.test(pn)) {
+        document.getElementById("NumberError").innerText = "Only Indian Phone Number Allowed";
+        return;
+    }
 
-  // if(/^[A-Za-z]+$/.test(nm)){
-  //     console.log("true input");
-  // }else{
-  //     console.log("wrong input");
-  // }
+    if (!db) {
+        document.getElementById("DOBError").innerText = "Required";
+    }
+    else {
+        const currentyear = new Date().getFullYear();
+        const birthyear = number(db.split("-")[0]);
+        
 
-  if (!+/^[A-Za-z]+$/.test(nm)) {
-    document.getElementById("nameError").innerText= "only albhapet and space allowed";
-    return;
-  }
+        if (currentyear - birthyear < 17) {
+            document.getElementById("DOBError").innerText = "Not Applicable For Less Than 17 Years";
+        }
 
-  if (!/^[\w\.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co.in)$/.test(em)) {
-    alert("Wrong email");
-    return;
-  }
-
-  if(!/^[6-9]\d{9}$/.test(ph))
-  {
-     alert("Wrong phone");
-    return;
-  }
-
-  const currentyear= new Date().getFullYear;
-  const birthyear= number(db.split("-")[0]);
-
-  if(currentyear-birthyear<17){
-    alert("not eligbile");
-    return;
-  }
-
-  // use logic age Calculatore and dont allow less then 18 year
+    }
 
 
-  const data = {
-    fullName: nm,
-    email: em,
-    phone: ph,
-    DOB: db,
-  };
-  console.log(data);
+
+
+
+    // use logic of age calculator and ddont allow less than 18 years 
+
+    const data = {
+        FullName: nm,
+        PhoneNumber: pn,
+        email: em,
+        DOB: db
+    };
+    console.log(data);
 }
