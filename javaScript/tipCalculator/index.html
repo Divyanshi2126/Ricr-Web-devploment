@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <style>
+      body {
+        background: linear-gradient(180deg, #001f4d, #001737);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .card {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 22px;
+        border: none;
+        overflow: hidden;
+      }
+
+      .tip-header {
+        background: #3d2002;
+        color: white;
+        text-align: center;
+        padding: 14px;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      .form-label {
+        font-weight: 600;
+        margin-top: 10px;
+        padding-left: 0;
+      }
+
+      .form-control,
+      .form-select {
+        border: none;
+        border-bottom: 2px solid #4d90fe;
+        border-radius: 0;
+        padding-left: 0;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        box-shadow: none;
+        border-bottom-color: #1a73e8;
+      }
+
+      .bill-wrapper {
+        position: relative;
+      }
+
+      .bill-wrapper span {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        color: #555;
+      }
+
+      .btn-calc {
+        background: #40c9c6;
+        border: none;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 6px;
+      }
+
+      .btn-calc:hover {
+        background: #36b5b2;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-light d-flex justify-content-center align-content-center min-vh-100"
+  >
+    <div class="card shadow p-4">
+      <div class="tip-header">TIP CALCULATOR</div>
+      <div class="text-start">
+        <div>
+          <div class="mb-3">
+            <label class="form-label">bill Amount</label>
+            <input
+              type="number"
+              name="bill"
+              id="bill"
+              class="form-control"
+              placeholder="Enter bill Amount"
+            />
+            <span>₹</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">How was the service ?</label>
+          <select name="service" id="service" class="form-select">
+            <option value="0">select service</option>
+            <option value="0.25">25%-Top notch</option>
+            <option value="0.20">20%-Ecxellent</option>
+            <option value="0.15">15%-Good</option>
+            <option value="0.10">10%-Bad</option>
+            <option value="0.05">5%-wrost</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label"> Total Number of people</label>
+          <input
+            type="number"
+            name=""
+            id="people"
+            class="form-control"
+            placeholder="Enter number of people"
+          />
+        </div>
+
+        <button class="btn btn-primary w-100" onclick="CalculateTip()">
+          Calculate
+        </button>
+
+        <p id="error" class="text-danger text-center mt-3 d-none">
+          Please enter a valid number
+        </p>
+
+        <div id="result" class="alert alert-success text-center mt-3 d-none">
+          Each person should pay <br />
+          <strong id="amount"></strong>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
