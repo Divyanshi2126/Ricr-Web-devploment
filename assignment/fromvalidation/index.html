@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Coaching Institute Registration</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        background: white;
+        margin: auto;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      fieldset {
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
+
+      legend {
+        font-weight: bold;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #2980b9;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #1f6391;
+      }
+
+      .Error {
+        color: red;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Coaching Institute Registration Form</h2>
+
+      <form onsubmit="Submit(); return false;">
+        <fieldset>
+          <legend>Personal Information</legend>
+
+          <label>Full Name</label>
+          <input type="text" id="FullName" />
+          <span class="Error" id="NameError"></span>
+
+          <label>Email</label>
+          <input type="text" id="Email" />
+          <span class="Error" id="EmailError"></span>
+
+          <label>Mobile Number</label>
+          <input type="text" id="Mobile" />
+          <span class="Error" id="MobileError"></span>
+
+          <label>Date of Birth</label>
+          <input type="date" id="DOB" />
+          <span class="Error" id="DOBError"></span>
+        </fieldset>
+
+        <fieldset>
+          <legend>Academic Details</legend>
+
+          <label>Qualification</label>
+          <select id="Qualification">
+            <option value="">Select</option>
+            <option>10th</option>
+            <option>12th</option>
+            <option>Graduate</option>
+            <option>Postgraduate</option>
+          </select>
+          <span class="Error" id="QualificationError"></span>
+
+          <label>Percentage / Grade</label>
+          <input type="text" id="Percentage" />
+          <span class="Error" id="PercentageError"></span>
+        </fieldset>
+
+        <fieldset>
+          <legend>Address</legend>
+
+          <label>Residential Address</label>
+          <textarea id="Address"></textarea>
+          <span class="Error" id="AddressError"></span>
+
+          <label>City</label>
+          <input type="text" id="City" />
+          <span class="Error" id="CityError"></span>
+
+          <label>Pin Code</label>
+          <input type="text" id="Pincode" />
+          <span class="Error" id="PincodeError"></span>
+        </fieldset>
+
+        <fieldset>
+          <legend>Guardian Details</legend>
+
+          <label>Guardian Name</label>
+          <input type="text" id="GuardianName" />
+          <span class="Error" id="GuardianNameError"></span>
+
+          <label>Guardian Mobile</label>
+          <input type="text" id="GuardianMobile" />
+          <span class="Error" id="GuardianMobileError"></span>
+        </fieldset>
+
+        <fieldset>
+          <legend>Additional Info</legend>
+
+          <label>How did you hear about us?</label>
+          <select id="Source">
+            <option value="">Select</option>
+            <option>Friends</option>
+            <option>Online Ad</option>
+            <option>Newspaper</option>
+            <option>Social Media</option>
+            <option>Other</option>
+          </select>
+          <span class="Error" id="SourceError"></span>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
