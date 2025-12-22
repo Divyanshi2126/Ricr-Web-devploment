@@ -35,12 +35,10 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     return;
   }
 
-  // Disable button & show spinner
   button.disabled = true;
   spinner.classList.remove("d-none");
   btnText.innerText = "Calculating...";
 
-  // Simulate processing delay
   setTimeout(() => {
     const basic = Number(basicInput);
     const salary = calculateGrossSalary(basic);
@@ -53,14 +51,12 @@ document.getElementById("calculateBtn").addEventListener("click", function () {
     resultDiv.classList.remove("d-none");
     successMsg.innerText = "Salary calculated successfully ✔";
 
-    // Reset button
     button.disabled = false;
     spinner.classList.add("d-none");
     btnText.innerText = "Calculate Gross Salary";
   }, 500);
 });
 
-// Reset function
 function resetForm() {
   document.getElementById("basicSalary").value = "";
   document.getElementById("result").classList.add("d-none");
