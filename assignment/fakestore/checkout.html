@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout | Shopping Kart</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <h2 class="logo">Shopping Kart</h2>
+    </nav>
+
+    <section class="content">
+      <h1>Checkout</h1>
+
+      <form id="checkoutForm">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="text" id="address" placeholder="Address" required />
+        <input type="tel" id="phone" placeholder="Phone Number" required />
+        <input type="email" id="email" placeholder="Email" required />
+
+        <select id="payment" required>
+          <option value="">Select Payment Mode</option>
+          <option>UPI</option>
+          <option>Card</option>
+          <option>Cash on Delivery</option>
+        </select>
+
+        <input
+          type="number"
+          id="quantity"
+          placeholder="Quantity"
+          min="1"
+          required
+        />
+
+        <button type="submit" class="btn">Place Order</button>
+      </form>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
