@@ -1,3 +1,7 @@
 #head{
   color: brown;
 }
+
+body{
+  background-color: rgb(227, 200, 153) !important;
+}
