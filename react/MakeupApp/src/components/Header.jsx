@@ -23,6 +23,14 @@ const Header = () => {
             {" "}
             Product{" "}
           </Link>
+          <Link to={"/login"} className="text-black">
+            {" "}
+            Login{" "}
+          </Link>
+          <Link to={"/signup"} className="text-black">
+            {" "}
+            Signup{" "}
+          </Link>
         </div>
       </div>
     </>
