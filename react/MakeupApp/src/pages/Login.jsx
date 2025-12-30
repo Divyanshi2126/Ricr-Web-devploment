@@ -1,92 +1,92 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Login = () => {
+  const [emailOrMobile, setEmailOrMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClearForm = () => {
+    setEmailOrMobile("");
+    setPassword("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      // Dummy API call (for testing)
+      const res = await fetch(
+        "https://official-joke-api.appspot.com/jokes/random"
+      );
+      const data = await res.json();
+
+      const loginData = {
+        emailOrMobile,
+        password,
+      };
+
+      console.log("Login Data:", loginData);
+    } catch (error) {
+      console.error("Error:", error.message);
+    } finally {
+      setIsLoading(false);
+      handleClearForm();
+    }
+  };
+
   return (
     <>
-      <div className=" text-black">
-        <h1 className=" text to-black text-center text-4xl font-bold mb-2">
-          Login
+    <div className="border w-2xl container mx-auto rounded-2xl m-4">
+      <div className="text-amber-950">
+        <h1 className="text-rose-900 text-center text-4xl font-bold  mb-2">
+          LOGIN
         </h1>
-        <div className="text-center ">
-          <form>
+
+        <div className="text-center "> 
+          <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="fullName">FULL Name:</label>
+              <label>Email or Mobile:</label>
               <input
                 type="text"
-                className="border p-2 m-1.5"
-                // value={fullName}
-                // onChange={(e) => setFullName(e.target.value)}
-                placeholder="Enter Your Full Name"
+                className="border p-2  m-1.5"
+                value={emailOrMobile}
+                onChange={(e) => setEmailOrMobile(e.target.value)}
+                placeholder="Enter Email or Mobile"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="mobileNumber">Mobile Number:</label>
-              <input
-                type="number"
-                name="mobileNumber"
-                className="border p-2  m-1.5 "
-                // value={email}
-                // onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter Your Number"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email">E-mail:</label>
-              <input
-                type="email"
-                name="Email"
-                className="border p-2  m-1.5 ml-10"
-                // value={email}
-                // onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter Your Email"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="Address">Address:</label>
-              <textarea
-                name="Adresss"
-                id=""
-                className="border p-2  m-1.5 ml-1"
-                // value={message}
-                // onChange={(e) => setMessage(e.target.value)}
-                placeholder="Enter Your Address"
-                required
-              ></textarea>
-            </div>
-
-            <div>
-              <label htmlFor="createPassword">Create Password:</label>
+              <label>Password:</label>
               <input
                 type="password"
-                name="password"
-                className="border p-2  m-1.5 "
-                // value={email}
-                // onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter Your Password"
+                className="border p-2 m-1.5 ml-6"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter Password"
                 required
               />
             </div>
+
             <button
-              type="reset"
-              className="border m-2 p-1 bg-[#F5AFAF] text-white p-1  border-black border-2 "
+              type="button"
+              onClick={handleClearForm}
+              className="border m-2 bg-red-500 text-white  border-black border-2 p-1"
             >
               Reset
             </button>
 
             <button
               type="submit"
-              className="border m-2 p-1 bg-[#F5AFAF] text-white p-1  border-black border-2 "
+              disabled={isLoading}
+              className="border m-2 bg-green-500 text-white border-black border-2 p-1"
             >
-              Submit
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </form>
         </div>
+      </div>
       </div>
     </>
   );

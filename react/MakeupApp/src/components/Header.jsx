@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <div className="bg-[#F5AFAF] text-center flex justify-between mb-9">
-        <h3 className="text-2xl font-extrabold text-white">My MakeupApp</h3>
+      <div className="bg-[#f2047b] text-center flex justify-between ">
+        <h3 className="text-2xl font-extrabold p-2">My MakeupApp</h3>
         <div className="p-2 flex gap-3 text-small">
           <Link to={"/"} className="text-black">
             {" "}
@@ -23,14 +23,16 @@ const Header = () => {
             {" "}
             Product{" "}
           </Link>
-          <Link to={"/login"} className="text-black">
-            {" "}
-            Login{" "}
-          </Link>
           <Link to={"/signup"} className="text-black">
             {" "}
             Signup{" "}
           </Link>
+          <Link to={"/login"} className="text-black">
+            {" "}
+            Login{" "}
+          </Link>
+
+         
         </div>
       </div>
     </>

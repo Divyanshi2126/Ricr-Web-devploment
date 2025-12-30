@@ -51,6 +51,7 @@ const Contact = () => {
                 required
               />
             </div>
+            
             <div>
               <label htmlFor="Email">Email</label>
               <input
