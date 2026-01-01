@@ -1,0 +1,62 @@
+[
+  {
+    "country_name": "India",
+    "currency_name": "Indian Rupee",
+    "currency_code": "INR",
+    "country_code": "IN"
+  },
+  {
+    "country_name": "United States of America",
+    "currency_name": "US Dollar",
+    "currency_code": "USD",
+    "country_code": "US"
+  },
+  {
+    "country_name": "United Kingdom",
+    "currency_name": "Pound Sterling",
+    "currency_code": "GBP",
+    "country_code": "GB"
+  },
+  {
+    "country_name": "Japan",
+    "currency_name": "Yen",
+    "currency_code": "JPY",
+    "country_code": "JP"
+  },
+  {
+    "country_name": "Canada",
+    "currency_name": "Canadian Dollar",
+    "currency_code": "CAD",
+    "country_code": "CA"
+  },
+  {
+    "country_name": "Australia",
+    "currency_name": "Australian Dollar",
+    "currency_code": "AUD",
+    "country_code": "AU"
+  },
+  {
+    "country_name": "Germany",
+    "currency_name": "Euro",
+    "currency_code": "EUR",
+    "country_code": "DE"
+  },
+  {
+    "country_name": "France",
+    "currency_name": "Euro",
+    "currency_code": "EUR",
+    "country_code": "FR"
+  },
+  {
+    "country_name": "China",
+    "currency_name": "Yuan Renminbi",
+    "currency_code": "CNY",
+    "country_code": "CN"
+  },
+  {
+    "country_name": "United Arab Emirates",
+    "currency_name": "UAE Dirham",
+    "currency_code": "AED",
+    "country_code": "AE"
+  }
+]
