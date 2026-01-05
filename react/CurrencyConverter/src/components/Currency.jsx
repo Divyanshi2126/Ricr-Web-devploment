@@ -30,6 +30,7 @@ const Currency = () => {
     } catch (error) {}
   };
 
+
   return (
     <>
       <div className="bg-amber-50 h-screen p-5">
@@ -104,6 +105,7 @@ const Currency = () => {
             Convert
           </button>
 
+
           <div className="border" />
 
           <div className="flex gap-3 items-center">
@@ -116,6 +118,5 @@ const Currency = () => {
     </>
   );
 };
-
 
 export default Currency;
