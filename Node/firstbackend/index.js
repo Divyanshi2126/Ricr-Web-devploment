@@ -8,7 +8,7 @@ const app = express();
 app.get("/",(req,res)=>
 {
     console.log("server is running");
-    res.json({message: "servere is running sucessefully"})
+    res.json({message: "servere is running Sucessefully"})
 })
 
 const port = process.env.PORT || 5000;
