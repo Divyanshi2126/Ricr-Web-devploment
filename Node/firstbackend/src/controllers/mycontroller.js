@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
 
-export const UserResgister = async (req, res) => {
+export const UserRegister = async (req, res) => {
   try {
     const { fullname, email, phone, password } = req.body;
     if (!fullname || !email || !phone || !password) {
@@ -54,7 +54,7 @@ export const UserLogin = async (req, res) => {
 
 export const UserLogout = async (req, res) => {
   try {
-    res.status(200).json({ message: "LogOut Succesfully" });
+    res.status(200).json({ message: "Logout Succesfully" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });

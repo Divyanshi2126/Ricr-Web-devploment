@@ -3,7 +3,7 @@ dotenv.config();
 
 import express from "express";
 import connectDB from "./src/config/db.js";
-import AuthRouter from ",/src/routers/MyRouter.js"
+import AuthRouter from "./src/routers/MyRouter.js"
 
 const app = express();
 
