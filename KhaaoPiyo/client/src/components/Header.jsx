@@ -36,7 +36,7 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          <button onClick={()=>navigate("/Login")} className="bg-(--color-secondary) py-2 px-4 font-bold hover:bg-(--color-secondary-hover) hover:text-white rounded  ">
+          <button onClick={()=>navigate("/Login")} className="bg-(--color-secondary) py-2 px-4 font-bold hover:bg-(--color-secondary-hover) hover:text-white rounded m-2 ">
             Login
           </button>
           <button  onClick={()=>navigate("/Register")} className="bg-(--color-secondary) py-2 px-4 font-bold hover:bg-(--color-secondary-hover) hover:text-white rounded ">

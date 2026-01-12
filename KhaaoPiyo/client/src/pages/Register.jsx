@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import api from "../config/Api";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -66,7 +67,7 @@ const Registration = () => {
   };
 
   // Submit Form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -77,8 +78,8 @@ const Registration = () => {
     }
 
     try {
-      console.log("Registration Data:", formData);
-      toast.success("Registration Successful 🎉");
+      const res = await api.post("/auth/register", formData);
+      toast.success(res.data.message);
       handleClearForm();
     } catch (error) {
       toast.error(error.message);
@@ -95,9 +96,7 @@ const Registration = () => {
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Registration
           </h1>
-          <p className="text-lg text-gray-600">
-            You are 1 step away from GrubGo
-          </p>
+          <p className="text-lg text-gray-600">Bhookh lage? Bas Khaao Piyo </p>
         </div>
 
         {/* Form */}
@@ -107,8 +106,6 @@ const Registration = () => {
             onReset={handleClearForm}
             className="p-8"
           >
-         
-
             <div className=" space-y-4">
               {/* Full Name */}
               <div>
@@ -118,7 +115,9 @@ const Registration = () => {
                   placeholder="Full Name"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 rounded-lg"
+                  required
+                  disabled={isLoading}
+                  className="w-full px-4 py-3 border-2 rounded-lg disabled:cursor-not-allowed disabled:bg-gray-200"
                 />
                 {validationError.fullName && (
                   <span className="text-xs text-red-500">
@@ -134,7 +133,9 @@ const Registration = () => {
                 placeholder="Email Address"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 rounded-lg"
+                disabled={isLoading}
+                required
+                className="w-full px-4 py-3 border-2 rounded-lg disabled:cursor-not-allowed disabled:bg-gray-200"
               />
 
               {/* Mobile */}
@@ -145,7 +146,9 @@ const Registration = () => {
                 maxLength="10"
                 value={formData.mobileNumber}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border-2 rounded-lg"
+                disabled={isLoading}
+                required
+                className="w-full px-4 py-3 border-2 rounded-lg disabled:cursor-not-allowed disabled:bg-gray-200"
               />
 
               {/* Password */}
@@ -156,7 +159,9 @@ const Registration = () => {
                   placeholder="Password"
                   value={formData.passWord}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 rounded-lg"
+                  disabled={isLoading}
+                  required
+                  className="w-full px-4 py-3 border-2 rounded-lg disabled:cursor-not-allowed disabled:bg-gray-200"
                 />
                 {validationError.passWord && (
                   <span className="text-xs text-red-500">
@@ -173,7 +178,9 @@ const Registration = () => {
                   placeholder="Confirm Password"
                   value={formData.confirmPassWord}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 rounded-lg"
+                  required
+                  disabled={isLoading}
+                  className="w-full px-4 py-3 border-2 rounded-lg disabled:cursor-not-allowed disabled:bg-gray-200"
                 />
                 {validationError.confirmPassWord && (
                   <span className="text-xs text-red-500">
@@ -186,18 +193,17 @@ const Registration = () => {
             {/* Buttons */}
             <div className="flex gap-4 pt-8 border-t-2 mt-8">
               <button
-                type="submit"
-                disabled={isLoading}
-                className="flex-1 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-bold py-4 rounded-lg hover:from-indigo-700 hover:to-indigo-800"
-              >
-                {isLoading ? "Submitting..." : "Submit Registration"}
-              </button>
-
-              <button
                 type="reset"
-                className="flex-1 bg-gray-300 font-bold py-4 rounded-lg hover:bg-gray-400"
+                className="flex-1 bg-gray-300 font-bold py-4 rounded-lg hover:bg-gray-400 hover:scale-102 transition duration-300"
               >
                 Clear Form
+              </button>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="flex-1 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-bold py-4 rounded-lg  transition duration-300 hover:from-indigo-700 hover:to-indigo-800 hover:scale-102 disabled:scale-100 disabled:bg-indigo-"
+              >
+                {isLoading ? "Submitting..." : "Submit Registration"}
               </button>
             </div>
           </form>
