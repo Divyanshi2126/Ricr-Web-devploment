@@ -77,6 +77,9 @@ const Registration = () => {
       return;
     }
 
+    // testing no. 1
+    console.log(formData)
+
     try {
       const res = await api.post("/auth/register", formData);
       toast.success(res.data.message);

@@ -3,13 +3,21 @@ import bcrypt from "bcrypt";
 
 export const UserRegister = async (req, res, next) => {
   try {
+
+    console.log(req.body);
+    // accept data from frontend
     const { fullName, email, mobileNumber, passWord } = req.body;
 
+
+    // verify that all data
     if (!fullName || !email || !mobileNumber || !passWord) {
       const error = new Error("all feilds required");
       error.statusCode = 400;
       return next(error);
     }
+    console.log({ fullName, email, mobileNumber, passWord });
+
+
     const existinguser = await User.findOne({ email });
     if (existinguser) {
       const error = new Error("email already registerd");
@@ -17,9 +25,13 @@ export const UserRegister = async (req, res, next) => {
       return next(error);
     }
 
+    console.log ("sending data to db");
+
     // encrpt the password
 
     const hashpassword = await bcrypt.hash(passWord, 10);
+
+    console.log("passWord hashing Done. hashpassword=",hashpassword);
 
     // save data to database
 
@@ -54,7 +66,7 @@ export const UserLogin = async (req, res, next) => {
     }
     // check if user is resigetr or not
     const existinguser = await User.findOne({ email });
-    if (existinguser) {
+    if (!existinguser) {
       const error = new Error("email not registerd");
       error.statusCode = 402;
       return next(error);
