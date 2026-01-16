@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import api from "../config/Api";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -52,6 +54,7 @@ const Login = () => {
       const res = await api.post("/auth/login", formData);
       toast.success(res.data.message);
       handleClearForm();
+      navigate("/user-dashboard")
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -68,7 +71,7 @@ const Login = () => {
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Login</h1>
             <p className="text-lg text-gray-600">
-              Login karo OR khaaoPiyo
+              You are 1 step away to stop your Cavings
             </p>
           </div>
 
@@ -93,10 +96,10 @@ const Login = () => {
                   />
 
                   <input
-                    type="passWord"
-                    name="passWord"
+                    type="password"
+                    name="password"
                     value={formData.password}
-                    placeholder="PassWord"
+                    placeholder="Password"
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition"
@@ -122,6 +125,7 @@ const Login = () => {
             </form>
           </div>
 
+          {/* Footer Note */}
           <p className="text-center text-gray-600 mt-8 text-sm">
             All fields marked are mandatory. We respect your privacy.
           </p>

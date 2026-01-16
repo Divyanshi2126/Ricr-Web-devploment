@@ -1,53 +1,42 @@
-import User from "../models/usermodel.js";
+import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
 export const UserRegister = async (req, res, next) => {
   try {
+    //accept data from Frontend
+    const { fullName, email, mobileNumber, password } = req.body;
 
-    console.log(req.body);
-    // accept data from frontend
-    const { fullName, email, mobileNumber, passWord } = req.body;
-
-
-    // verify that all data
-    if (!fullName || !email || !mobileNumber || !passWord) {
-      const error = new Error("all feilds required");
+    //verify that all data exist
+    if (!fullName || !email || !mobileNumber || !password) {
+      const error = new Error("All feilds required");
       error.statusCode = 400;
       return next(error);
     }
-    console.log({ fullName, email, mobileNumber, passWord });
 
-
-    const existinguser = await User.findOne({ email });
-    if (existinguser) {
-      const error = new Error("email already registerd");
+    //Check for duplaicate user before registration
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      const error = new Error("Email already registered");
       error.statusCode = 409;
       return next(error);
     }
 
-    console.log ("sending data to db");
+    //encrypt the password
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
 
-    // encrpt the password
-
-    const hashpassword = await bcrypt.hash(passWord, 10);
-
-    console.log("passWord hashing Done. hashpassword=",hashpassword);
-
-    // save data to database
-
+    //save data to database
     const newUser = await User.create({
       fullName,
       email,
       mobileNumber,
-      passWord: hashpassword,
+      password: hashPassword,
     });
 
-    // send response to frontend
-
+    // send response to Frontend
     console.log(newUser);
     res.status(201).json({ message: "Registration Successfull" });
-
-    // end
+    //End
   } catch (error) {
     next(error);
   }
@@ -55,45 +44,43 @@ export const UserRegister = async (req, res, next) => {
 
 export const UserLogin = async (req, res, next) => {
   try {
-    // fetch data from frontend
-    const { email, passWord } = req.body;
+    //Fetch Data from Frontend
+    const { email, password } = req.body;
 
-    // verfy that all data exist
-    if (!email || !passWord) {
-      const error = new Error("all feilds required");
+    //verify that all data exist
+    if (!email || !password) {
+      const error = new Error("All feilds required");
       error.statusCode = 400;
       return next(error);
     }
-    // check if user is resigetr or not
-    const existinguser = await User.findOne({ email });
-    if (!existinguser) {
-      const error = new Error("email not registerd");
+
+    //Check if user is registred or not
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      const error = new Error("Email not registered");
       error.statusCode = 402;
       return next(error);
     }
 
-    // verfy the password
-
-    const isVerified = await bcrypt.compare(passWord, existinguser.passWord);
+    //verify the Password
+    const isVerified = await bcrypt.compare(password, existingUser.password);
     if (!isVerified) {
-      const error = new Error("password did not match");
-      error.statusCode = 400;
+      const error = new Error("Password didn't match");
+      error.statusCode = 402;
       return next(error);
     }
 
-    // send response to frontend
-
-    res.status(200).json({ message: "login Successfull", data: existinguser });
-
-    // end
+    //send message to Frontend
+    res.status(200).json({ message: "Login Successfull", data: existingUser });
+    //End
   } catch (error) {
     next(error);
   }
 };
 
-export const Userlogout = async (res, req, next) => {
+export const Userlogout = async (req, res, next) => {
   try {
-    res.status(200).json({ message: "login Successfull" });
+    res.status(200).json({ message: "Logout Successfull" });
   } catch (error) {
     next(error);
   }
