@@ -1,18 +1,18 @@
+
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import api from "../config/Api";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 const Login = () => {
-  const navigate = useNavigate();
+const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const [isLoading, setIsLoading] = useState(false);
-  const [validationError, setValidationError] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,38 +26,21 @@ const Login = () => {
     });
   };
 
-  const validate = () => {
-    let Error = {};
-
-    if (
-      !/^[\w\.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co.in)$/.test(
-        formData.email
-      )
-    ) {
-      Error.email = "Use Proper Email Format";
-    }
-
-    setValidationError(Error);
-    return Object.keys(Error).length === 0;
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!validate()) {
-      setIsLoading(false);
-      toast.error("Fill the Form Correctly");
-      return;
-    }
 
+    console.log(formData);
     try {
       const res = await api.post("/auth/login", formData);
       toast.success(res.data.message);
       handleClearForm();
-      navigate("/user-dashboard");
+      navigate("/user-dashboard")
     } catch (error) {
-      toast.error(error.message);
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Unknown Error");
     } finally {
       setIsLoading(false);
     }
@@ -65,93 +48,75 @@ const Login = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-[var(--color-background)] py-8 px-4">
+      <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-6 px-4">
         <div className="max-w-xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-extrabold text-[var(--color-secondary)] mb-2">
-              KHAAOPIYO Login
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              Welcome Back
             </h1>
-            <p className="text-lg text-[var(--color-text-muted)]">
-              Welcome back! Let’s get you fed 😋
-            </p>
+            {/* <p className="text-lg text-gray-600">
+              You are 1 step away to stop your Cavings
+            </p> */}
           </div>
 
           {/* Form Container */}
-          <div className="bg-white rounded-2xl shadow-lg shadow-black/10 overflow-hidden">
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
             <form
               onSubmit={handleSubmit}
               onReset={handleClearForm}
               className="p-8"
             >
-              <div className="space-y-4">
-                {/* Email */}
-                <div>
+              {/* Personal Information */}
+              <div className="mb-10">
+                <div className="space-y-4">
                   <input
                     type="email"
                     name="email"
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleChange}
+                    required
                     disabled={isLoading}
-                    className="w-full px-4 py-3 rounded-xl border-2
-                    border-[var(--color-secondary)]
-                    focus:outline-none focus:ring-2
-                    focus:ring-[var(--color-accent)]
-                    disabled:bg-gray-100"
+                    className="w-full h-fit px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
                   />
-                  {validationError.email && (
-                    <span className="text-xs text-[var(--color-accent)] font-medium">
-                      {validationError.email}
-                    </span>
-                  )}
-                </div>
 
-                {/* Password */}
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  disabled={isLoading}
-                  className="w-full px-4 py-3 rounded-xl border-2
-                  border-[var(--color-secondary)]
-                  focus:outline-none focus:ring-2
-                  focus:ring-[var(--color-accent)]
-                  disabled:bg-gray-100"
-                />
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    placeholder="Create Password"
+                    onChange={handleChange}
+                    required
+                    disabled={isLoading}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
+                  />
+                </div>
               </div>
 
-              {/* Buttons */}
-              <div className="flex gap-4 pt-8 mt-8 border-t border-gray-200">
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="flex-1 bg-[var(--color-secondary)]
-                  hover:bg-[var(--color-secondary-hover)]
-                  text-white font-bold py-4 rounded-xl
-                  transition-all duration-300 transform hover:scale-105
-                  shadow-md disabled:opacity-60"
-                >
-                  {isLoading ? "Logging in..." : "Login"}
-                </button>
-
+              {/* Submit Button */}
+              <div className="flex gap-4 pt-8 border-t-2 border-gray-200">
                 <button
                   type="reset"
                   disabled={isLoading}
-                  className="flex-1 bg-gray-200 text-[var(--color-primary)]
-                  font-bold py-4 rounded-xl hover:bg-gray-300 transition"
+                  className="flex-1 bg-gray-300 text-gray-800 font-bold py-4 px-6 rounded-lg hover:bg-gray-400 transition duration-300 transform hover:scale-105 disabled:scale-100 disabled:bg-gray-300 disabled:cursor-not-allowed"
                 >
                   Clear Form
+                </button>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="flex-1 bg-linear-to-r from-indigo-600 to-indigo-700 text-white font-bold py-4 px-6 rounded-lg hover:from-indigo-700 hover:to-indigo-800 transition duration-300 transform hover:scale-105 shadow-lg disabled:scale-100 disabled:bg-gray-300  disabled:cursor-not-allowed"
+                >
+                  {isLoading ? "loading.." : "Login"}
                 </button>
               </div>
             </form>
           </div>
 
-          {/* Footer */}
-          <p className="text-center text-[var(--color-text-muted)] mt-8 text-sm">
-            We respect your privacy ❤️
+          {/* Footer Note */}
+          <p className="text-center text-gray-600 mt-8 text-sm">
+            All fields marked are mandatory. We respect your privacy.
           </p>
         </div>
       </div>
