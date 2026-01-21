@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 
 export const genToken = async (user, res) => {
-
   try {
     const payload = {
       id: user._id,
@@ -14,10 +13,10 @@ export const genToken = async (user, res) => {
     console.log(token);
 
     res.cookie("parleG", token, {
-        maxAge:1000*60*60*24,
-        httpOnly:true,
-        secure:false,
-        sameSite:'lax'
+      maxAge: 1000 * 60 * 60 * 24,
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
     });
   } catch (error) {
     throw error;
