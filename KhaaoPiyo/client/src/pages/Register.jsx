@@ -32,28 +32,25 @@ const Register = () => {
     let Error = {};
 
     if (formData.fullName.length < 3) {
-      Error.fullName = "Name should be More Than 3 Characters";
-    } else {
-      if (!/^[A-Za-z ]+$/.test(formData.fullName)) {
-        Error.fullName = "Only Contain A-Z , a-z and space";
-      }
+      Error.fullName = "Name should be more than 3 characters";
+    } else if (!/^[A-Za-z ]+$/.test(formData.fullName)) {
+      Error.fullName = "Only alphabets and space allowed";
     }
 
     if (
-      !/^[\w\.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co.in)$/.test(
+      !/^[\w.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co.in)$/.test(
         formData.email
       )
     ) {
-      Error.email = "Use Proper Email Format";
+      Error.email = "Use proper email format";
     }
 
     if (!/^[6-9]\d{9}$/.test(formData.mobileNumber)) {
-      Error.mobileNumber = "Only Indian Mobile Number allowed";
+      Error.mobileNumber = "Only Indian mobile number allowed";
     }
 
     setValidationError(Error);
-
-    return Object.keys(Error).length > 0 ? false : true;
+    return Object.keys(Error).length === 0;
   };
 
   const handleSubmit = async (e) => {
@@ -62,136 +59,131 @@ const Register = () => {
 
     if (!validate()) {
       setIsLoading(false);
-      toast.error("Fill the Form Correctly");
+      toast.error("Fill the form correctly");
       return;
     }
 
-    console.log(formData)
     try {
       const res = await api.post("/auth/register", formData);
       toast.success(res.data.message);
       handleClearForm();
     } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message || "Unknown Error");
+      toast.error(error?.response?.data?.message || "Unknown error");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <>
-      <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-6 px-4">
-        <div className="max-w-xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              Registration
-            </h1>
-            <p className="text-lg text-gray-600">
-              You are 1 step away to stop your Cavings
-            </p>
-          </div>
+    <div
+      className="min-h-screen flex items-center justify-center px-4"
+      style={{ backgroundColor: "var(--color-background)" }}
+    >
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl overflow-hidden">
 
-          {/* Form Container */}
-          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-            <form
-              onSubmit={handleSubmit}
-              onReset={handleClearForm}
-              className="p-8"
-            >
-              {/* Personal Information */}
-              <div className="mb-10">
-                <div className="space-y-4">
-                  <div>
-                    <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full Name"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      required
-                      disabled={isLoading}
-                      className="w-full h-fit px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
-                    />
-                    {validationError.fullName && (
-                      <span className="text-xs text-red-500">
-                        {validationError.fullName}
-                      </span>
-                    )}
-                  </div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    disabled={isLoading}
-                    className="w-full h-fit px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
-                  />
-                  <input
-                    type="tel"
-                    name="mobileNumber"
-                    placeholder="Mobile Number"
-                    maxLength="10"
-                    value={formData.mobileNumber}
-                    onChange={handleChange}
-                    required
-                    disabled={isLoading}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
-                  />
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    placeholder="Create Password"
-                    onChange={handleChange}
-                    required
-                    disabled={isLoading}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
-                  />
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                    disabled={isLoading}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
-                  />
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <div className="flex gap-4 pt-8 border-t-2 border-gray-200">
-                <button
-                  type="reset"
-                  disabled={isLoading}
-                  className="flex-1 bg-gray-300 text-gray-800 font-bold py-4 px-6 rounded-lg hover:bg-gray-400 transition duration-300 transform hover:scale-105 disabled:scale-100 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                >
-                  Clear Form
-                </button>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="flex-1 bg-linear-to-r from-indigo-600 to-indigo-700 text-white font-bold py-4 px-6 rounded-lg hover:from-indigo-700 hover:to-indigo-800 transition duration-300 transform hover:scale-105 shadow-lg disabled:scale-100 disabled:bg-gray-300  disabled:cursor-not-allowed"
-                >
-                  {isLoading ? "Submitting" : "Submit"}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* Footer Note */}
-          <p className="text-center text-gray-600 mt-8 text-sm">
-            All fields marked are mandatory. We respect your privacy.
+        {/* Header */}
+        <div
+          className="text-center py-6"
+          style={{ backgroundColor: "var(--color-primary)" }}
+        >
+          <h1 className="text-3xl font-extrabold text-white">
+            Join KHAAOPIYO 🍕
+          </h1>
+          <p className="text-sm text-white/80 mt-1">
+            Create your account & start ordering
           </p>
         </div>
+
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          onReset={handleClearForm}
+          className="p-6 space-y-4"
+        >
+          <Input
+            placeholder="Full Name"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            disabled={isLoading}
+            error={validationError.fullName}
+          />
+
+          <Input
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            disabled={isLoading}
+            error={validationError.email}
+          />
+
+          <Input
+            placeholder="Mobile Number"
+            name="mobileNumber"
+            maxLength="10"
+            value={formData.mobileNumber}
+            onChange={handleChange}
+            disabled={isLoading}
+            error={validationError.mobileNumber}
+          />
+
+          <Input
+            type="password"
+            placeholder="Create Password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            disabled={isLoading}
+          />
+
+          {/* Buttons */}
+          <div className="flex gap-4 pt-6">
+            <button
+              type="reset"
+              disabled={isLoading}
+              className="flex-1 py-3 rounded-xl font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 transition disabled:cursor-not-allowed"
+            >
+              Clear
+            </button>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`flex-1 py-3 rounded-xl font-semibold text-white transition
+                ${isLoading ? "opacity-70" : "hover:scale-[1.02]"}`}
+              style={{ backgroundColor: "var(--color-secondary)" }}
+            >
+              {isLoading ? "Registering..." : "Create Account 🚀"}
+            </button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
+
+/* Reusable Input */
+const Input = ({ error, ...props }) => (
+  <div>
+    <input
+      {...props}
+      className={`w-full px-4 py-3 rounded-xl border outline-none transition
+        ${error ? "border-red-400" : "border-gray-300 focus:border-(--color-secondary)"}
+        disabled:bg-gray-100 disabled:cursor-not-allowed`}
+    />
+    {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+  </div>
+);
 
 export default Register;

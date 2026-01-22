@@ -6,7 +6,7 @@ export const genToken = async (user, res) => {
       id: user._id,
       role: user.role || "admin",
     };
-    const token = await jwt.sign(payload.process.env.JWT_SECRET, {
+    const token = await jwt.sign(payload,process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
