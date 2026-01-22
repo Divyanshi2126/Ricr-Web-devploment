@@ -1,150 +1,130 @@
+
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import api from "../config/Api";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const { setUser, setIsLogin } = useAuth();
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const [isLoading, setIsLoading] = useState(false);
-  const [validationError, setValidationError] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validate = () => {
-    let Error = {};
-
-    if (
-      !/^[\w.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co\.in)$/.test(
-        formData.email
-      )
-    ) {
-      Error.email = "Enter a valid email address";
-    }
-
-    if (formData.password.length < 6) {
-      Error.password = "Password must be at least 6 characters";
-    }
-
-    setValidationError(Error);
-    return Object.keys(Error).length === 0;
+  const handleClearForm = () => {
+    setFormData({
+      email: "",
+      password: "",
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validate()) {
-      toast.error("Please fix the errors");
-      return;
-    }
-
     setIsLoading(true);
+
+    console.log(formData);
     try {
       const res = await api.post("/auth/login", formData);
-
-      toast.success(res.data.message || "Welcome back 🍽️");
+      toast.success(res.data.message);
       setUser(res.data.data);
       setIsLogin(true);
-
-      sessionStorage.setItem("GrubGoUser", JSON.stringify(res.data.data));
+      sessionStorage.setItem("CravingUser",JSON.stringify(res.data.data))
+      handleClearForm();
       navigate("/user-dashboard");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed");
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Unknown Error");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center px-4"
-      style={{ backgroundColor: "var(--color-background)" }}
-    >
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
+    <>
+      <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-6 px-4">
+        <div className="max-w-xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              Welcome Back
+            </h1>
+            {/* <p className="text-lg text-gray-600">
+              You are 1 step away to stop your Cavings
+            </p> */}
+          </div>
 
-        {/* Header */}
-        <div
-          className="text-center py-6"
-          style={{ backgroundColor: "var(--color-primary)" }}
-        >
-          <h1 className="text-3xl font-extrabold text-white">KHAAOPIYO 🍔</h1>
-          <p className="text-sm text-white/80 mt-1">
-            Login to continue your food journey
+          {/* Form Container */}
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <form
+              onSubmit={handleSubmit}
+              onReset={handleClearForm}
+              className="p-8"
+            >
+              {/* Personal Information */}
+              <div className="mb-10">
+                <div className="space-y-4">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={isLoading}
+                    className="w-full h-fit px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
+                  />
+
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    placeholder="Create Password"
+                    onChange={handleChange}
+                    required
+                    disabled={isLoading}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="flex gap-4 pt-8 border-t-2 border-gray-200">
+                <button
+                  type="reset"
+                  disabled={isLoading}
+                  className="flex-1 bg-gray-300 text-gray-800 font-bold py-4 px-6 rounded-lg hover:bg-gray-400 transition duration-300 transform hover:scale-105 disabled:scale-100 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                  Clear Form
+                </button>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="flex-1 bg-linear-to-r from-indigo-600 to-indigo-700 text-white font-bold py-4 px-6 rounded-lg hover:from-indigo-700 hover:to-indigo-800 transition duration-300 transform hover:scale-105 shadow-lg disabled:scale-100 disabled:bg-gray-300  disabled:cursor-not-allowed"
+                >
+                  {isLoading ? "loading.." : "Login"}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Footer Note */}
+          <p className="text-center text-gray-600 mt-8 text-sm">
+            All fields marked are mandatory. We respect your privacy.
           </p>
         </div>
-
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-5">
-
-          <InputField
-            label="Email"
-            type="email"
-            placeholder="Enter your email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={validationError.email}
-            disabled={isLoading}
-          />
-
-          <InputField
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            error={validationError.password}
-            disabled={isLoading}
-          />
-
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`w-full py-3 rounded-xl font-semibold text-white transition
-              ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:scale-[1.02]"}`}
-            style={{ backgroundColor: "var(--color-secondary)" }}
-          >
-            {isLoading ? "Logging in..." : "Login & Order 🍕"}
-          </button>
-
-          <p className="text-center text-sm text-gray-600">
-            New here?{" "}
-            <Link
-              to="/register"
-              className="font-semibold hover:underline"
-              style={{ color: "var(--color-secondary)" }}
-            >
-              Create Account
-            </Link>
-          </p>
-        </form>
       </div>
-    </div>
+    </>
   );
 };
-
-/* Reusable Input Component */
-const InputField = ({ label, error, ...props }) => (
-  <div>
-    <label className="text-sm font-medium text-gray-700">{label}</label>
-    <input
-      {...props}
-      className={`w-full mt-1 px-4 py-3 rounded-xl border outline-none transition
-        ${error ? "border-red-400" : "border-gray-300 focus:border-[var(--color-secondary)]"}`}
-    />
-    {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-  </div>
-);
 
 export default Login;
