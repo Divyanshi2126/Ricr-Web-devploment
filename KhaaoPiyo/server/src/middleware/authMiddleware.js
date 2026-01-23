@@ -1,7 +1,7 @@
-import jwt from "JsonWebTokenError";
+import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
-export const protect = async (req, resizeBy, next) => {
+export const protect = async (req, res, next) => {
   try {
     const biscut = req.cookies.parleG;
     console.log("Token Recived in cookies ;", biscut);

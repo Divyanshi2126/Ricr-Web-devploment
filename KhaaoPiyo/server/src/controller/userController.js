@@ -1,22 +1,22 @@
 export const Userupdate = async (req ,res,next)=>{
     try {
         
-        const {fullname , email, mobilenumber} =req.body;
+        const {fullName , email, mobileNumber} =req.body;
         const currentUser = req.user;
 
-        if(fullname||email||mobilenumber)
+        if(fullName||email||mobileNumber)
         {
             const error = new Error("All field required");
-        error.StatusCode = 401;
+        error.StatusCode = 400;
          return next(error);
     }
         
 
         console.log (currentUser);
         
-        currentUser.fullname=fullname;
+        currentUser.fullName=fullName;
         currentUser.email=email;
-        currentUser.mobilenumber=mobilenumber;
+        currentUser.mobilenumber=mobileNumber;
         await currentUser.save();
 
 
