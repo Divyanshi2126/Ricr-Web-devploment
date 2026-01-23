@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import UserSideBar from "../../components/userDashboard/UserSideBar";
-import UserOverview from "../../components/userDashboard/userOverview";
-import UserProfile from "../../components/userDashboard/UserProfile";
-import UserOrders from "../../components/userDashboard/UserOrders";
-import UserTransactions from "../../components/userDashboard/userTransactions";
-import UserHelpDesk from "../../components/userDashboard/UserHelpDesk";
+import UserSidebar from "../../components/userDasboard/UserSidebar";
+import UserOverview from "../../components/userDasboard/UserOverview";
+import UserProfile from "../../components/userDasboard/UserProfile";
+import UserOrders from "../../components/userDasboard/UserOrder";
+import UserTransactions from "../../components/userDasboard/UserTransaction";
+import UserHelpDesk from "../../components/userDasboard/UserHelpDesk";
 
 const UserDashboard = () => {
   const [active, setActive] = useState("overview");
@@ -16,7 +16,7 @@ const UserDashboard = () => {
         <div
           className={`bg-(--color-background) duration-300 ${isCollapsed ? "w-2/60" : "w-12/60"}`}
         >
-          <UserSideBar
+          <UserSidebar
             active={active}
             setActive={setActive}
             isCollapsed={isCollapsed}

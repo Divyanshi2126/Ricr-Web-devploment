@@ -1,5 +1,5 @@
 import React from "react";
-import tranparentLogo from "../assets/transparentLogo.png";
+import tranparentLogo from "../assets/transparent.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
