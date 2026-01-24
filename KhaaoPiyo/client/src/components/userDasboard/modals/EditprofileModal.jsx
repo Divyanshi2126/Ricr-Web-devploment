@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
+import api from "../../../config/Api";
 
 const EditprofileModal = ({ onClose }) => {
-  const { user } = useAuth();
+const { user, setUser, setIsLogin } = useAuth();
 
   const [formData, setFormData] = useState({
     fullName: user?.fullName || "",
@@ -14,12 +15,21 @@ const EditprofileModal = ({ onClose }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // 👉 call update profile API here
-    console.log(formData);
-    onClose();
-  };
+    console.log( formData);
+
+try {
+      const res = await api.put("/user/update", formData);
+      sessionStorage.setItem("KhaaoPiyo", JSON.stringify(res.data.data));
+      setUser(res.data.data);
+      setIsLogin(true);
+      
+    } catch (error) {
+      console.log(error);
+    } finally {
+      onClose();
+    }  };
 
   return (
     <>
@@ -34,7 +44,7 @@ const EditprofileModal = ({ onClose }) => {
               onClick={onClose}
               className="text-gray-500 hover:text-black text-xl"
             >
-              ✕
+              
             </button>
           </div>
 
