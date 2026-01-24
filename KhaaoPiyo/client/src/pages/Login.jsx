@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import api from "../config/Api";
@@ -38,8 +37,29 @@ const Login = () => {
       toast.success(res.data.message);
       setUser(res.data.data);
       setIsLogin(true);
-      sessionStorage.setItem("CravingUser",JSON.stringify(res.data.data))
+      sessionStorage.setItem("KhaaoPiyo", JSON.stringify(res.data.data));
       handleClearForm();
+      switch (res.data.data.role) {
+        case "manager": {
+          setRole("manager");
+          navigate("/user-dashboard");
+          break;
+        }
+        case "partner": {
+          setRole("partner");
+          navigate("/user-dashboard");
+          break;
+        }
+        case "customer": {
+          setRole("customer");
+          navigate("/user-dashboard");
+          break;
+        }
+
+        default:
+          break;
+
+      }
       navigate("/user-dashboard");
     } catch (error) {
       console.log(error);
