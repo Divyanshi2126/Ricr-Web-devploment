@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import EditprofileModal from "./modals/EditprofileModal";
 
 const UserProfile = () => {
-  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, } = useAuth();
+    const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+
+
 
   return (
     <>
