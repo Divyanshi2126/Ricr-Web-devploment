@@ -6,8 +6,8 @@ import { TbTransactionRupee } from "react-icons/tb";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdLogout } from "react-icons/md";
-import { toast } from "react-toastify";
-import Api from "../../api/Api"; // apne path ke hisaab se
+import { toast } from "react-hot-toast";
+import api from "../../config/Api";
 
 const UserSidebar = ({ active, setActive, isCollapsed, setIsCollapsed }) => {
   const menuItems = [
@@ -24,7 +24,7 @@ const UserSidebar = ({ active, setActive, isCollapsed, setIsCollapsed }) => {
 
   const handleLogout = async () => {
     try {
-      const res = await Api.get("/auth/logout");
+      const res = await api.get("/auth/logout");
       toast.success(res.data.message);
 
       setUser("");
