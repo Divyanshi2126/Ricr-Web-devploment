@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
-  const { setUser, setIsLogin } = useAuth();
+const { setUser, setIsLogin, setRole } = useAuth();
 
   const navigate = useNavigate();
 

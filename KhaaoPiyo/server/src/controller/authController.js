@@ -1,18 +1,25 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import { genToken } from "../utils/authToken.js";
+import OTP from "../models/otpModel.js";
+import { sendOTPEmail } from "../utils/emailService.js";
 
-/* ============ REGISTER ============ */
 export const UserRegister = async (req, res, next) => {
   try {
-    const { fullName, email, mobileNumber, password } = req.body;
+    console.log(req.body);
+    //accept data from Frontend
+    const { fullName, email, mobileNumber, password, role } = req.body;
 
-    if (!fullName || !email || !mobileNumber || !password) {
-      const error = new Error("All fields required");
+    //verify that all data exist
+    if (!fullName || !email || !mobileNumber || !password || !role) {
+      const error = new Error("All feilds required");
       error.statusCode = 400;
       return next(error);
     }
 
+    console.log({ fullName, email, mobileNumber, password });
+
+    //Check for duplaicate user before registration
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       const error = new Error("Email already registered");
@@ -20,35 +27,51 @@ export const UserRegister = async (req, res, next) => {
       return next(error);
     }
 
+    console.log("Sending Data to DB");
+
+    //encrypt the password
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
-    await User.create({
+    console.log("Password Hashing Done. hashPassword = ", hashPassword);
+
+    const photoURL = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
+    const photo = {
+      url: photoURL,
+    };
+
+    //save data to database
+    const newUser = await User.create({
       fullName,
-      email,
+      email: email.toLowerCase(),
       mobileNumber,
       password: hashPassword,
+      role,
+      photo,
     });
 
-    return res.status(201).json({
-      message: "Registration Successful",
-    });
+    // send response to Frontend
+    console.log(newUser);
+    res.status(201).json({ message: "Registration Successfull" });
+    //End
   } catch (error) {
     next(error);
   }
 };
 
-/* ============ LOGIN ============ */
 export const UserLogin = async (req, res, next) => {
   try {
+    //Fetch Data from Frontend
     const { email, password } = req.body;
 
+    //verify that all data exist
     if (!email || !password) {
-      const error = new Error("All fields required");
+      const error = new Error("All feilds required");
       error.statusCode = 400;
       return next(error);
     }
 
+    //Check if user is registred or not
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
       const error = new Error("Email not registered");
@@ -56,42 +79,72 @@ export const UserLogin = async (req, res, next) => {
       return next(error);
     }
 
-    const isVerified = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
+    //verify the Password
+    const isVerified = await bcrypt.compare(password, existingUser.password);
     if (!isVerified) {
       const error = new Error("Password didn't match");
       error.statusCode = 401;
       return next(error);
     }
 
-    // ✅ ONLY this (cookie set ho jaayegi)
+    //Token Generation will be done here
     genToken(existingUser, res);
 
-    // ✅ password remove
-    const { password: _, ...safeUser } = existingUser._doc;
-
-    return res.status(200).json({
-      message: "Login Successful",
-      data: safeUser,
-    });
+    //send message to Frontend
+    res.status(200).json({ message: "Login Successfull", data: existingUser });
+    //End
   } catch (error) {
     next(error);
   }
 };
 
-/* ============ LOGOUT ============ */
 export const UserLogout = async (req, res, next) => {
   try {
-    res.clearCookie("parleG", {
-      httpOnly: true,
-      sameSite: "lax",
+    res.clearCookie("parleG");
+    res.status(200).json({ message: "Logout Successfull" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const UserGenOTP = async (req, res, next) => {
+  try {
+    //Fetch Data from Frontend
+    const { email } = req.body;
+
+    //verify that all data exist
+    if (!email) {
+      const error = new Error("All feilds required");
+      error.statusCode = 400;
+      return next(error);
+    }
+
+    //Check if user is registred or not
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      const error = new Error("Email not registered");
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    const otp = Math.floor(Math.random() * 1000000).toString();
+    console.log(typeof otp);
+
+    //encrypt the otp
+    const salt = await bcrypt.genSalt(10);
+    const hashOTP = await bcrypt.hash(otp, salt);
+
+    console.log(hashOTP);
+
+    await OTP.create({
+      email,
+      otp: hashOTP,
+      createdAt: new Date(),
     });
 
-    return res.status(200).json({
-      message: "Logout Successful",
-    });
+    await sendOTPEmail(email, otp);
+
+    res.status(200).json({ message: "OTP send on registered email" });
   } catch (error) {
     next(error);
   }
