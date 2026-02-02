@@ -1,12 +1,13 @@
-
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cloudinary from "./src/config/cloudinary.js";
 import connectDB from "./src/config/db.js";
+
 import AuthRouter from "./src/routers/authRouter.js";
 import UserRouter from "./src/routers/userRouter.js";
+import RestaurantRouter from "./src/routers/restaurantRouter.js"; // ✅ add this
 
 const app = express();
 
@@ -16,12 +17,15 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/auth", AuthRouter);
-app.use("/user",UserRouter);
+app.use("/user", UserRouter);
+app.use("/restaurant", RestaurantRouter); // ✅ add this
 
 app.get("/", (req, res) => {
   console.log("Server is Working");
+  res.send("Server is Working");
 });
 
+// Error handler
 app.use((err, req, res, next) => {
   const ErrorMessage = err.message || "Internal Server Error";
   const StatusCode = err.statusCode || 500;
@@ -36,13 +40,9 @@ app.listen(port, async () => {
   connectDB();
 
   try {
-
-    const res = await cloudinary.api.ping();  
-    console.log("cloudinary API is working:" ,res);
-
-    
+    const res = await cloudinary.api.ping();
+    console.log("cloudinary API is working:", res);
   } catch (error) {
-    console.error("Error connecting api:",error);
-    
+    console.error("Error connecting api:", error);
   }
 });

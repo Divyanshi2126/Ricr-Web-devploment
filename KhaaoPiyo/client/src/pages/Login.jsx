@@ -33,6 +33,8 @@ const { setUser, setIsLogin, setRole } = useAuth();
 
     console.log(formData);
     try {
+
+      
       const res = await api.post("/auth/login", formData);
       toast.success(res.data.message);
       setUser(res.data.data);
@@ -42,12 +44,12 @@ const { setUser, setIsLogin, setRole } = useAuth();
       switch (res.data.data.role) {
         case "manager": {
           setRole("manager");
-          navigate("/user-dashboard");
+          navigate("/restaurant-dashboard");
           break;
         }
         case "partner": {
           setRole("partner");
-          navigate("/user-dashboard");
+          navigate("/partner-dashboard");
           break;
         }
         case "customer": {
