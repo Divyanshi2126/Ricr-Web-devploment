@@ -8,7 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
 import UserDashboard from "./pages/dashboards/UserDashboard";
-import RestaurantDashboard from "./pages/dashboards/ResturantDashboard";
+import RestaurantDashboard  from "./pages/dashboards/ResturantDashboard";
 
 const App = () => {
   return (

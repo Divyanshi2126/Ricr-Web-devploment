@@ -7,7 +7,6 @@ import connectDB from "./src/config/db.js";
 
 import AuthRouter from "./src/routers/authRouter.js";
 import UserRouter from "./src/routers/userRouter.js";
-import RestaurantRouter from "./src/routers/restaurantRouter.js"; // ✅ add this
 
 const app = express();
 
@@ -18,7 +17,6 @@ app.use(morgan("dev"));
 
 app.use("/auth", AuthRouter);
 app.use("/user", UserRouter);
-app.use("/restaurant", RestaurantRouter); // ✅ add this
 
 app.get("/", (req, res) => {
   console.log("Server is Working");
