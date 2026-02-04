@@ -7,7 +7,7 @@ const menuSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    dishName: {
+    itemName: {
       type: String,
       required: true,
     },
@@ -16,6 +16,10 @@ const menuSchema = mongoose.Schema(
       required: true,
     },
     servingSize: {
+      type: String,
+      required: true,
+    },
+    preparationTime: {
       type: String,
       required: true,
     },
@@ -47,7 +51,7 @@ const menuSchema = mongoose.Schema(
       enum: ["available", "unavailable", "removed"],
       default: "available",
     },
-    image: {
+    images: {
       type: [
         {
           url: { type: String, required: true },

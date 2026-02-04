@@ -5,7 +5,7 @@ const AuthContext = React.createContext();
 
 export const AuthProvider = (props) => {
   const [user, setUser] = useState(
-    JSON.parse(sessionStorage.getItem("KhaaoPiyo")) || "",
+    JSON.parse(sessionStorage.getItem("CravingUser")) || "",
   );
   const [isLogin, setIsLogin] = useState(!!user);
   const [role, setRole] = useState(user?.role || "");

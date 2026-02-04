@@ -16,6 +16,7 @@ const Register = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+   
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -28,7 +29,6 @@ const Register = () => {
       confirmPassword: "",
       role: "",
     });
-    setValidationError({});
   };
 
   const validate = () => {
@@ -44,7 +44,7 @@ const Register = () => {
 
     if (
       !/^[\w\.]+@(gmail|outlook|ricr|yahoo)\.(com|in|co.in)$/.test(
-        formData.email
+        formData.email,
       )
     ) {
       Error.email = "Use Proper Email Format";
@@ -55,19 +55,12 @@ const Register = () => {
     }
 
     if (!formData.role) {
-      Error.role = "Role is required";
-    }
-
-    if (formData.password.length < 6) {
-      Error.password = "Password must be at least 6 characters";
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      Error.confirmPassword = "Passwords do not match";
+      Error.role = "Please choose any one";
     }
 
     setValidationError(Error);
-    return Object.keys(Error).length === 0;
+
+    return Object.keys(Error).length > 0 ? false : true;
   };
 
   const handleSubmit = async (e) => {
@@ -79,6 +72,10 @@ const Register = () => {
       toast.error("Fill the Form Correctly");
       return;
     }
+
+    console.log(formData);
+
+    
 
     try {
       const res = await api.post("/auth/register", formData);
@@ -96,6 +93,7 @@ const Register = () => {
     <>
       <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-6 px-4">
         <div className="max-w-xl mx-auto">
+          {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               Registration
@@ -105,60 +103,69 @@ const Register = () => {
             </p>
           </div>
 
+          {/* Form Container */}
           <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-            <form onSubmit={handleSubmit} onReset={handleClearForm} className="p-8">
+            <form
+              onSubmit={handleSubmit}
+              onReset={handleClearForm}
+              className="p-8"
+            >
+              {/* Personal Information */}
               <div className="mb-10">
                 <div className="space-y-4">
                   <div>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
+                      <label>I am </label>
+                      <div className="flex items-center gap-2">
                         <input
                           type="radio"
                           name="role"
                           id="manager"
                           checked={formData.role === "manager"}
-                          value="manager"
+                          value={"manager"}
                           onChange={handleChange}
                         />
-                        <label htmlFor="manager">Restaurant Manager</label>
+                        <label htmlFor="manager">Resturant Manager</label>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         <input
                           type="radio"
                           name="role"
                           id="partner"
                           checked={formData.role === "partner"}
-                          value="partner"
+                          value={"partner"}
                           onChange={handleChange}
                         />
-                        <label htmlFor="partner">Partner</label>
+                        <label htmlFor="partner">Delivery Partner</label>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         <input
                           type="radio"
                           name="role"
                           id="customer"
                           checked={formData.role === "customer"}
-                          value="customer"
+                          value={"customer"}
                           onChange={handleChange}
                         />
                         <label htmlFor="customer">Customer</label>
                       </div>
                     </div>
-                    {validationError.role && (
+                     {validationError.role && (
                       <span className="text-xs text-red-500">
                         {validationError.role}
                       </span>
                     )}
-
+                  </div>
+                  <div>
                     <input
                       type="text"
                       name="fullName"
                       placeholder="Full Name"
                       value={formData.fullName}
                       onChange={handleChange}
+                      required
                       disabled={isLoading}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg"
+                      className="w-full h-fit px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
                     />
                     {validationError.fullName && (
                       <span className="text-xs text-red-500">
@@ -166,17 +173,16 @@ const Register = () => {
                       </span>
                     )}
                   </div>
-
                   <input
                     type="email"
                     name="email"
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleChange}
+                    required
                     disabled={isLoading}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg"
+                    className="w-full h-fit px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
                   />
-
                   <input
                     type="tel"
                     name="mobileNumber"
@@ -184,43 +190,54 @@ const Register = () => {
                     maxLength="10"
                     value={formData.mobileNumber}
                     onChange={handleChange}
+                    required
                     disabled={isLoading}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
                   />
-
                   <input
                     type="password"
                     name="password"
-                    placeholder="Create Password"
                     value={formData.password}
+                    placeholder="Create Password"
                     onChange={handleChange}
+                    required
                     disabled={isLoading}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
                   />
-
                   <input
                     type="password"
                     name="confirmPassword"
                     placeholder="Confirm Password"
                     value={formData.confirmPassword}
                     onChange={handleChange}
+                    required
                     disabled={isLoading}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
                   />
                 </div>
               </div>
 
+              {/* Submit Button */}
               <div className="flex gap-4 pt-8 border-t-2 border-gray-200">
-                <button type="reset" disabled={isLoading} className="flex-1 bg-gray-300 py-4 rounded-lg">
+                <button
+                  type="reset"
+                  disabled={isLoading}
+                  className="flex-1 bg-gray-300 text-gray-800 font-bold py-4 px-6 rounded-lg hover:bg-gray-400 transition duration-300 transform hover:scale-105 disabled:scale-100 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
                   Clear Form
                 </button>
-                <button type="submit" disabled={isLoading} className="flex-1 bg-indigo-600 text-white py-4 rounded-lg">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="flex-1 bg-linear-to-r from-indigo-600 to-indigo-700 text-white font-bold py-4 px-6 rounded-lg hover:from-indigo-700 hover:to-indigo-800 transition duration-300 transform hover:scale-105 shadow-lg disabled:scale-100 disabled:bg-gray-300  disabled:cursor-not-allowed"
+                >
                   {isLoading ? "Submitting" : "Submit"}
                 </button>
               </div>
             </form>
           </div>
 
+          {/* Footer Note */}
           <p className="text-center text-gray-600 mt-8 text-sm">
             All fields marked are mandatory. We respect your privacy.
           </p>

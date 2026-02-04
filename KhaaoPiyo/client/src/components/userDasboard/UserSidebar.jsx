@@ -6,10 +6,15 @@ import { TbTransactionRupee } from "react-icons/tb";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdLogout } from "react-icons/md";
-import { toast } from "react-hot-toast";
 import api from "../../config/Api";
+import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const UserSidebar = ({ active, setActive, isCollapsed, setIsCollapsed }) => {
+const UserSideBar = ({ active, setActive, isCollapsed, setIsCollapsed }) => {
+  const { setUser, setIsLogin } = useAuth();
+  const navigate = useNavigate();
+
   const menuItems = [
     { key: "overview", title: "OverView", icon: <TbChartTreemap /> },
     { key: "profile", title: "Profile", icon: <ImProfile /> },
@@ -26,23 +31,18 @@ const UserSidebar = ({ active, setActive, isCollapsed, setIsCollapsed }) => {
     try {
       const res = await api.get("/auth/logout");
       toast.success(res.data.message);
-
       setUser("");
       setIsLogin(false);
-
-      sessionStorage.clear();
-      localStorage.clear();
-
-      window.location.href = "/login";
+      navigate("/");
+      sessionStorage.removeItem("CravingUser");
     } catch (error) {
-      toast.error("Logout failed");
-      console.log(error);
+      toast.error(error?.response?.data?.message || "Unknown Error");
     }
   };
 
   return (
     <>
-      <div className="p-2">
+      <div className="p-2 flex flex-col justify-between h-full">
         <div>
           <div className="h-10 text-xl font-bold flex gap-5 items-center mb-3">
             <button
@@ -82,10 +82,10 @@ const UserSidebar = ({ active, setActive, isCollapsed, setIsCollapsed }) => {
 
         <div>
           <button
-            className={`flex gap-3 items-center p-2 rounded-xl duration-300 text-base h-12 w-full text-nowrap 
-                       hover:bg-amber-200/70 hover:text-red-600 bg-red-500 text-white`}
+            className="flex gap-3 items-center text-lg ps-2 rounded-xl h-10 w-full text-nowrap overflow-hidden duration-300 hover:bg-red-500 hover:text-white text-red-600"
             onClick={handleLogout}
           >
+            {" "}
             <MdLogout />
             {!isCollapsed && "Logout"}
           </button>
@@ -95,4 +95,4 @@ const UserSidebar = ({ active, setActive, isCollapsed, setIsCollapsed }) => {
   );
 };
 
-export default UserSidebar;
+export default UserSideBar;

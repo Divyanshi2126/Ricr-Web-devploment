@@ -130,8 +130,6 @@ const EditRestaurantProfileModal = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("FORM DATA =>", formData); 
-
     if (!validateForm()) {
       setMessage({ type: "error", text: "Please fix the errors above" });
       return;
@@ -142,9 +140,8 @@ const EditRestaurantProfileModal = ({ onClose }) => {
 
     try {
       const res = await api.put("/user/update", formData);
-      console.log("API RESPONSE =>", res.data); 
       if (res.data?.data) {
-        sessionStorage.setItem("KhaaopiyoUser", JSON.stringify(res.data.data));
+        sessionStorage.setItem("CravingUser", JSON.stringify(res.data.data));
         setUser(res.data.data);
         setIsLogin(true);
         setMessage({ type: "success", text: "Profile updated successfully!" });

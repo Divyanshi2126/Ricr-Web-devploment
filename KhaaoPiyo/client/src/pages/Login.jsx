@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import api from "../config/Api";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
+import ForgetPasswordModal from "../components/publicDashboard/ForgetPasswordModal";
 
 const Login = () => {
-const { setUser, setIsLogin, setRole } = useAuth();
+  const { setUser, setIsLogin, setRole } = useAuth();
 
   const navigate = useNavigate();
+
+  const [isForgetPasswordModelOpen, setIsForgetPasswordModelOpen] =
+    useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -33,23 +37,21 @@ const { setUser, setIsLogin, setRole } = useAuth();
 
     console.log(formData);
     try {
-
-      
       const res = await api.post("/auth/login", formData);
       toast.success(res.data.message);
       setUser(res.data.data);
       setIsLogin(true);
-      sessionStorage.setItem("KhaaoPiyo", JSON.stringify(res.data.data));
+      sessionStorage.setItem("CravingUser", JSON.stringify(res.data.data));
       handleClearForm();
       switch (res.data.data.role) {
         case "manager": {
           setRole("manager");
-          navigate("/restaurant-dashboard");
+          navigate("/resturant-dashboard");
           break;
         }
         case "partner": {
           setRole("partner");
-          navigate("/partner-dashboard");
+          navigate("/rider-dashboard");
           break;
         }
         case "customer": {
@@ -57,10 +59,14 @@ const { setUser, setIsLogin, setRole } = useAuth();
           navigate("/user-dashboard");
           break;
         }
+        case "admin": {
+          setRole("admin");
+          navigate("/admin-dashboard");
+          break;
+        }
 
         default:
           break;
-
       }
     } catch (error) {
       console.log(error);
@@ -92,7 +98,7 @@ const { setUser, setIsLogin, setRole } = useAuth();
               className="p-8"
             >
               {/* Personal Information */}
-              <div className="mb-10">
+              <div className="mb-5">
                 <div className="space-y-4">
                   <input
                     type="email"
@@ -109,12 +115,23 @@ const { setUser, setIsLogin, setRole } = useAuth();
                     type="password"
                     name="password"
                     value={formData.password}
-                    placeholder="Create Password"
+                    placeholder="Password"
                     onChange={handleChange}
                     required
                     disabled={isLoading}
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500 transition disabled:cursor-not-allowed disabled:bg-gray-200"
                   />
+                </div>
+                <div className="w-full flex justify-end">
+                  <button
+                    className="text-(--color-primary) hover:text-(--color-secondary) cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsForgetPasswordModelOpen(true);
+                    }}
+                  >
+                    Forget Password?
+                  </button>
                 </div>
               </div>
 
@@ -144,6 +161,12 @@ const { setUser, setIsLogin, setRole } = useAuth();
           </p>
         </div>
       </div>
+
+      {isForgetPasswordModelOpen && (
+        <ForgetPasswordModal
+          onClose={() => setIsForgetPasswordModelOpen(false)}
+        />
+      )}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useAuth } from "../../context/authContext";
-import EditRestaurantProfileModal from "./modals/EditManagerModal";
+import { useAuth } from "../../context/AuthContext";
+import EditRestaurantProfileModal from "./modals/EditRestaurantProfileModal";
 import UserImage from "../../assets/userImage.jpg";
 import {
   FaCamera,
@@ -11,11 +11,11 @@ import { FaFileAlt } from "react-icons/fa";
 import { BiSolidBank } from "react-icons/bi";
 import api from "../../config/Api";
 import toast from "react-hot-toast";
-import ResetPasswordModal from "../RestaurantDashboard/modals/ResetPasswordModal";
+import ResetPasswordModal from "./modals/ResetPasswordModal";
 
 const RestaurantProfile = () => {
   const { user, setUser } = useAuth();
-  const [isEditManagerModal, setIsEditManagerModal] = useState(false);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
   const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] =
     useState(false);
   const [preview, setPreview] = useState("");
@@ -28,7 +28,7 @@ const RestaurantProfile = () => {
       const res = await api.patch("/user/changePhoto", form_Data);
       toast.success(res.data.message);
       setUser(res.data.data);
-      sessionStorage.setItem("KhaooPiyo", JSON.stringify(res.data.data));
+      sessionStorage.setItem("CravingUser", JSON.stringify(res.data.data));
       setPreview("");
     } catch (error) {
       toast.error(error?.response?.data?.message || "Unknown Error");
@@ -136,7 +136,7 @@ const RestaurantProfile = () => {
                 {/* Action Buttons */}
                 <div className="flex gap-3">
                   <button
-                    onClick={() => setIsEditManagerModal(true)}
+                    onClick={() => setIsEditProfileModalOpen(true)}
                     className="px-6 py-2 bg-(--color-secondary) text-white rounded-lg hover:bg-(--color-secondary-hover) transition font-semibold"
                   >
                     Edit Profile
@@ -269,9 +269,9 @@ const RestaurantProfile = () => {
         </div>
       </div>
 
-      {isEditManagerModal && (
+      {isEditProfileModalOpen && (
         <EditRestaurantProfileModal
-          onClose={() => setIsEditManagerModal(false)}
+          onClose={() => setIsEditProfileModalOpen(false)}
         />
       )}
 

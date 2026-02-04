@@ -9,7 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdLogout } from "react-icons/md";
 import api from "../../config/Api";
 import toast from "react-hot-toast";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const RestaurantSideBar = ({

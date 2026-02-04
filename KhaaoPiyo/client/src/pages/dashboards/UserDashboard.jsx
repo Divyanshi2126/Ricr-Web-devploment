@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from "react";
-import UserSidebar from "../../components/userDasboard/UserSidebar";
+import UserSideBar from "../../components/userDasboard/UserSidebar";
 import UserOverview from "../../components/userDasboard/UserOverview";
 import UserProfile from "../../components/userDasboard/UserProfile";
 import UserOrders from "../../components/userDasboard/UserOrder";
 import UserTransactions from "../../components/userDasboard/UserTransaction";
 import UserHelpDesk from "../../components/userDasboard/UserHelpDesk";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
+  const { role, isLogin } = useAuth();
+  const navigate = useNavigate();
   const [active, setActive] = useState("overview");
   const [isCollapsed, setIsCollapsed] = useState(false);
-
-  const navigate = useNavigate();
-  const { isLogin, role } = useAuth();
 
   useEffect(() => {
     if (!isLogin) {
       navigate("/login");
     }
-  }, [isLogin, navigate]);
+  });
 
   if (role !== "customer") {
     return (
       <>
-        <div>You are not Logged as Customer. Please login again</div>
+        <div className="p-3">
+          <div className="border rounded shadow p-5 w-4xl mx-auto text-center bg-gray-100">
+            <div className="text-5xl text-red-600">
+              ⊗
+            </div>
+            <div className="text-xl">
+              You are not login as Customer. Please Login again.
+            </div>
+          </div>
+        </div>
       </>
     );
   }
@@ -33,11 +41,9 @@ const UserDashboard = () => {
     <>
       <div className="w-full h-[90vh] flex">
         <div
-          className={`bg-(--color-background) duration-300 ${
-            isCollapsed ? "w-2/60" : "w-12/60"
-          }`}
+          className={`bg-(--color-background) duration-300 ${isCollapsed ? "w-2/60" : "w-12/60"}`}
         >
-          <UserSidebar
+          <UserSideBar
             active={active}
             setActive={setActive}
             isCollapsed={isCollapsed}
