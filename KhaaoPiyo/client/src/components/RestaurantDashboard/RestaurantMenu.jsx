@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import AddMenuItemModal from "./modals/AddMenuItem";
+import AddMenuItemModal from "./modals/AddMenuItemModal";
 import api from "../../config/Api";
 import toast from "react-hot-toast";
 

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import api from "../config/Api";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import ForgetPasswordModal from "../components/publicDashboard/ForgetPasswordModal";
+import { useAuth } from "../context/authContext";
+import ForgetPasswordModal from "../components/publicModals/ForgetPasswordModal";
 
 
 const Login = () => {
