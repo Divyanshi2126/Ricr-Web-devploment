@@ -1,26 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  /* 🔥 Primary (Text, headings, borders) */
-  --color-primary: #3A2E2E;          /* Dark brown – readable & premium */
-  --color-primary-hover: #2A1F1F;
+  --color-primary: #1A1C22;         
+  --color-primary-hover: #000000;
 
-  /* 🍊 Secondary (Buttons, highlights) */
-  --color-secondary: #FF8A00;        /* Mango Orange */
-  --color-secondary-hover: #E67600;
+  --color-secondary: #FFD23F;       
+  --color-secondary-hover: #F9C80E;
 
-  /* 🌶 Accent (CTA, errors, focus states) */
-  --color-accent: #E63946;           /* Chilli Red */
+  --color-accent: #FF3F00;          
 
-  /* 🥭 Backgrounds */
-  --color-background: #FFF7ED;       /* Warm cream background */
-  --color-surface: #FFFFFF;          /* Cards / forms */
+  --color-background: #F8F9FA;      
+  --color-surface: #FFFFFF;         
 
-  /* 🧠 Text */
-  --color-text: #3A2E2E;              /* Main text */
-  --color-text-muted: #7A6F6F;        /* Sub text */
+  --color-text: #1A1C22;            
+  --color-text-muted: #6C757D;      
 
-  /* ✨ Extra (optional but useful) */
-  --color-success: #2EC4B6;           /* Mint green */
-  --color-error: #E63946;
+  --color-success: #06D6A0;         
+  --color-error: #EF476F;
 }
