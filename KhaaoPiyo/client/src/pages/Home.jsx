@@ -9,7 +9,6 @@ const Home = () => {
       {/* HERO SECTION */}
       <div className="min-h-screen bg-(--color-background) px-6 flex items-center">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-
           {/* LEFT CONTENT */}
           <div>
             <span className="inline-block bg-white px-4 py-2 rounded-full shadow text-sm font-semibold text-(--color-secondary)">
@@ -17,24 +16,21 @@ const Home = () => {
             </span>
 
             <h1 className="mt-6 text-5xl font-extrabold text-(--color-primary)leading-tight">
-              Good Food,<br />
-              <span className="text-(--color-secondary)">
-                Good Mood 😋
-              </span>
+              Good Food,
+              <br />
+              <span className="text-(--color-secondary)">Good Mood 😋</span>
             </h1>
 
             <p className="mt-6 text-lg text-(--color-text) opacity-80">
-              Welcome to <span className="font-semibold">KHAAOPIYO</span> —  
-              where every bite feels like home 🏡💛  
-              Order your favorite meals and enjoy restaurant-quality food,
-              made with love ❤️
+              Welcome to <span className="font-semibold">KHAAOPIYO</span> —
+              where every bite feels like home 🏡💛 Order your favorite meals
+              and enjoy restaurant-quality food, made with love ❤️
             </p>
 
             <div className="flex gap-4 mt-10">
               <button
-                onClick={() => navigate("/login")}
-                className="bg-[var(--color-secondary)] text-white px-8 py-4 rounded-xl font-bold
-                hover:bg-[var(--color-secondary-hover)] transition transform hover:scale-110 shadow-xl"
+                onClick={() => navigate("/order-now")} // Ise "/OrderNow" se badal kar "/order-now" kar dein
+                className="bg-[var(--color-secondary)] text-white px-8 py-4 rounded-xl font-bold hover:bg-[var(--color-secondary-hover)] transition transform hover:scale-110 shadow-xl"
               >
                 🍔 Order Now
               </button>
@@ -90,8 +86,8 @@ const Home = () => {
           </h2>
 
           <p className="mt-6 text-lg text-[var(--color-text)] opacity-80">
-            From quick bites 🍟 to full meals 🍛 —  
-            KHAAOPIYO brings happiness to your plate.
+            From quick bites 🍟 to full meals 🍛 — KHAAOPIYO brings happiness to
+            your plate.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mt-12">

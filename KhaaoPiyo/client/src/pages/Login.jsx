@@ -47,7 +47,8 @@ const Login = () => {
       switch (res.data.data.role) {
         case "manager": {
           setRole("manager");
-          navigate("/resturant-dashboard");
+          // FIX: Updated from "/resturant-dashboard" to "/restaurant-dashboard"
+          navigate("/restaurant-dashboard");
           break;
         }
         case "partner": {
@@ -86,9 +87,6 @@ const Login = () => {
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               Welcome Back
             </h1>
-            {/* <p className="text-lg text-gray-600">
-              You are 1 step away to stop your Cavings
-            </p> */}
           </div>
 
           {/* Form Container */}
