@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import api from "../config/Api";
-// import Loading from "../components/Loading";
 import { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
 

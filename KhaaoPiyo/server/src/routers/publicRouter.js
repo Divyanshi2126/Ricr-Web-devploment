@@ -1,20 +1,11 @@
-import contactModel from "../models/contactModel.js";
-import restaurantModel from "../models/restaurantModel.js"; // Model import karna na bhoolein
+import express from "express";
+import { NewContact, getAllRestaurants } from "../controller/publicController.js"; 
 
-// Pehle se maujood function
-export const NewContact = async (req, res) => { 
-  /* ... logic ... */ 
-};
+const router = express.Router();
 
-// YE WALA ADD KAREIN (export keyword ke saath)
-export const getAllRestaurants = async (req, res) => {
-  try {
-    const restaurants = await restaurantModel.find(); // Database se data nikalna
-    res.status(200).json({
-      success: true,
-      data: restaurants
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+// Routes definition
+router.post('/new-contact', NewContact);
+router.get('/allRestaurants', getAllRestaurants); 
+
+// SABSE ZAROORI: Ye line backend crash fix karegi
+export default router;
