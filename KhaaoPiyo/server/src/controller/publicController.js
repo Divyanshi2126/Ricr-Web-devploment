@@ -29,3 +29,17 @@ export const NewContact = async (req, res, next) => {
     next(error);
   }
 };
+export const getAllRestaurants = async (req, res, next) => {
+  try {
+    const restaurants = await User.find({ role: "manager" }).select(
+      "-password",
+    );
+
+    res.status(200).json({
+      message: "Restaurants fetched successfully",
+      data: restaurants,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
