@@ -6,11 +6,9 @@ const About = () => {
 
   return (
     <>
-      {/* HERO / STORY SECTION */}
       <div className="min-h-screen bg-[var(--color-background)] px-6 flex items-center">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           
-          {/* Left Text */}
           <div>
             <h1 className="text-5xl font-extrabold text-[var(--color-primary)] leading-tight">
               Our Story 🍔
@@ -31,7 +29,6 @@ const About = () => {
             </button>
           </div>
 
-          {/* Right Image / Illustration */}
           <div className="bg-white rounded-3xl shadow-2xl p-8 flex items-center justify-center">
             <img
               src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80"
@@ -42,7 +39,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* MISSION / VALUES SECTION */}
       <div className="bg-white py-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold text-[var(--color-primary)]">
